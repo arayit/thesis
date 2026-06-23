@@ -1,67 +1,69 @@
 \chapter{Background and Related Work}
 \label{ch:background}
 
-This chapter provides the background needed to follow the rest of the thesis:
-the principle of photoacoustic spectroscopy, the QEPAS technique and its
-transducer, the detection scheme used with a pulsed laser, the figures of merit
-used to compare sensors, and the spectroscopy of \nto.
+This chapter gives the background needed to follow the rest of the thesis. It introduces the principle of photoacoustic spectroscopy, the QEPAS technique and its transducer, the detection scheme used with a pulsed laser, the figures of merit used to compare sensors, and the spectroscopy of \nto.
 
 \section{Photoacoustic Spectroscopy}
 \label{sec:pas}
 
+Photoacoustic spectroscopy (PAS) is an absorption-based detection technique that measures the absorbed optical power rather than the transmitted power, by sensing the sound that the absorption generates. The effect was first reported by Bell in 1880, who found that a periodically interrupted beam of sunlight falling on a sample produced an audible tone~\cite{Bell1880}. It stayed a laboratory curiosity until intense and spectrally pure laser sources turned it into a practical method for trace-gas analysis~\needcite{review establishing modern laser-based photoacoustic spectroscopy for trace-gas sensing}.
 
+The mechanism is a short chain of energy conversion. When the laser wavelength coincides with a molecular absorption line, the analyte absorbs the light and releases that energy as heat through molecular collisions. If the incident optical power is modulated at a frequency $f$, the heating and therefore the local pressure are modulated at the same frequency, which launches an acoustic wave that a suitable transducer can detect.
 
-Explain the photoacoustic effect: modulated optical absorption heats the gas
-periodically, generating a pressure (acoustic) wave that a transducer detects.
-Note that the signal is proportional to the absorbed optical power, so it scales
-with laser power and with analyte concentration.
+For an optically thin sample the absorbed power is $P_\text{abs}=P_0\,\alpha L$, where $P_0$ is the incident optical power, $\alpha$ the absorption coefficient, and $L$ an interaction length. The absorption coefficient is itself proportional to the analyte number density through $\alpha=\sigma N$, with $\sigma$ the absorption cross-section. The photoacoustic signal $S$ is therefore proportional to the product of laser power and analyte concentration,
+\begin{equation}
+  \label{eq:pas-signal}
+  S \;=\; K\,P_0\,\alpha \;=\; K\,P_0\,\sigma N,
+\end{equation}
+where the cell constant $K$ collects the transducer responsivity and the cell geometry~\needcite{standard photoacoustic signal expression and definition of the cell constant}. Two consequences of \cref{eq:pas-signal} matter throughout this thesis. The first is that the technique is intrinsically zero-background, since with no absorption there is no signal. Sensitivity can then be improved simply by raising the laser power, unlike a transmission measurement that has to resolve a small change against a large background. The second is that, because $S$ is proportional to $N$, calibrating the signal against known concentrations gives a direct quantitative measurement route, which is used in \cref{ch:results}.
+
+Conventionally the transducer is a sensitive microphone placed in a gas cell whose dimensions form an acoustic resonator at $f$ and amplify the signal~\needcite{resonant photoacoustic cell with microphone detection}. This approach is limited by the microphone's sensitivity to environmental acoustic noise and by the relatively large cell volume it needs. The quartz-enhanced variant described next removes both limitations by replacing the microphone with a sharply resonant quartz tuning fork.
 
 \section{Quartz-Enhanced Photoacoustic Spectroscopy (QEPAS)}
 \label{sec:qepas}
 
-Describe how QEPAS replaces the microphone with a quartz tuning fork acting as a
-resonant piezoelectric transducer~\cite{kosterev2002}, optionally with an
-acoustic micro-resonator (the ADM). Discuss the high quality factor $Q$, the
-narrow resonance at $f_0$, and why this gives strong noise immunity and a small
-sampling volume~\cite{patimisco2014}.
+Quartz-enhanced photoacoustic spectroscopy (QEPAS) keeps the photoacoustic principle but changes the transducer. In place of a microphone it uses a quartz tuning fork, the same kind of millimetre-scale piezoelectric resonator that keeps time in a quartz wristwatch~\needcite{the founding QEPAS paper that introduced the quartz tuning fork as the photoacoustic transducer}. The acoustic wave from the gas drives the two prongs of the fork into their flexural mode, and the resulting mechanical strain produces a piezoelectric charge that the fork delivers as a small electrical current. A transimpedance preamplifier then converts this current into a voltage for the detection electronics.
+
+What makes the fork attractive for an instrument is its frequency response. It behaves as a sharply tuned resonator with a single narrow peak at a well-defined resonance frequency $f_0$, around \SI{12}{\kilo\hertz} for the forks used here, and with a high quality factor $Q$ that can reach several thousand at reduced pressure~\needcite{typical QTF resonance frequency and quality factor in QEPAS}. The fork responds only to acoustic energy that falls inside the narrow band around $f_0$. Wideband environmental noise, which is the main weakness of microphone cells, is therefore rejected almost completely, and the sensor can work outside a quiet acoustic enclosure~\needcite{a QEPAS review covering the tuning-fork transducer and its noise immunity}.
+
+The high quality factor brings a second benefit that matters for the system design. Because the fork stores acoustic energy over many oscillation periods, a usable signal builds up from a very small gas volume, on the order of a cubic millimetre between the prongs. This keeps the sample volume and the gas consumption low, which is helpful when the analyte is scarce or costly.
+
+In practice the bare fork is paired with an acoustic micro-resonator, a pair of thin tubes that concentrate the sound field at the prongs and raise the signal further by an amount that depends on the tube geometry~\needcite{acoustic micro-resonator configuration and signal gain in QEPAS}. The fork together with this micro-resonator and the integrated preamplifier forms the acoustic detection module (ADM) used in this work, which is described in \cref{sec:adm}.
 
 \section{Detection Scheme: Amplitude Modulation with a Pulsed QCL}
 \label{sec:detection}
 
-For a continuous-wave laser, wavelength modulation with second-harmonic (2f)
-lock-in detection is common. With a \emph{pulsed} QCL, as used in this thesis,
-the laser intensity is instead modulated at the tuning-fork resonance $f_0$
-(amplitude modulation), and the photoacoustic signal is recovered with a lock-in
-amplifier at the fundamental (1f). The absorption line is scanned by slowly
-tuning the laser wavelength via temperature and/or drive current. Explain the
-trade-offs of pulsed operation (e.g.\ spectral broadening, duty cycle) relative
-to CW.
+The transducer responds only near its resonance, so the optical excitation has to deposit its energy at $f_0$. There are two common ways to arrange this, and they lead to two different detection schemes.
+
+With a continuous-wave laser the usual choice is wavelength modulation. The emission wavelength is dithered back and forth across the absorption line at half the fork frequency, $f_0/2$. Because absorption is a roughly symmetric function of wavelength, the photoacoustic signal appears mainly at the second harmonic of the dither, which is arranged to land exactly on the fork resonance $f_0$. Detecting at this harmonic moves the measurement away from low-frequency laser intensity noise and gives a clean, background-free line shape~\needcite{wavelength modulation with second-harmonic (2f) detection in QEPAS}.
+
+The quantum cascade laser used in this work runs in pulsed mode, which calls for the simpler amplitude-modulation scheme instead. A train of short current pulses at the fork resonance switches the optical power on and off at $f_0$, so the absorbed power, and with it the photoacoustic signal, is already modulated at $f_0$ and can be recovered directly at the fundamental rather than at the second harmonic. A lock-in amplifier referenced to the pulse train then extracts this signal from the noise. The detailed implementation of this scheme, including the reference path and the lock-in settings, is given in \cref{sec:am-scheme}.
+
+To record a spectrum the laser wavelength is tuned slowly across the line while the modulation at $f_0$ continues, which traces out the absorption feature point by point. This slow tuning is done through the laser temperature and drive current.
+
+Pulsed operation is convenient but it has a cost. The strong current pulse heats the laser chip within each pulse, so the emission wavelength drifts during the pulse and the effective linewidth is broader than in continuous-wave operation~\needcite{intrapulse heating and spectral broadening in pulsed QCLs}. The low duty cycle also means that the average optical power is only a small fraction of the peak power, which limits the average power available to drive the photoacoustic signal. In short, pulsed amplitude modulation trades some spectral resolution and average power for the simplicity of a pulsed source and single-frequency detection.
 
 \section{Figures of Merit}
 \label{sec:fom}
 
-Define the metrics used later: signal-to-noise ratio, the normalized
-noise-equivalent absorption (NNEA, in $\mathrm{cm^{-1}\,W\,Hz^{-1/2}}$),
-minimum detectable concentration, and the use of the Allan deviation to find the
-optimal integration time.
+To compare the sensor with other instruments the raw signal has to be reduced to a few standard figures of merit. The same quantities are used in \cref{ch:results} to report the performance of this sensor.
+
+The most basic figure is the signal-to-noise ratio (SNR), the ratio of the demodulated photoacoustic signal to the standard deviation of the noise measured under the same conditions. The minimum detectable concentration follows from it as the analyte concentration that would give an SNR of one, obtained from a calibration of signal against known concentrations together with the measured noise.
+
+A bare SNR or detection limit is hard to compare across systems that use different lasers and time constants, because the signal scales with the available optical power and with the detection bandwidth. The normalized noise-equivalent absorption (NNEA) removes this dependence. It is the smallest absorption coefficient the system could detect at an SNR of one, normalized to the optical power and to the detection bandwidth, and it is quoted in units of $\mathrm{cm^{-1}\,W\,Hz^{-1/2}}$~\needcite{definition of the normalized noise-equivalent absorption}. A lower NNEA means a more sensitive system, and because it factors out laser power and bandwidth it is the standard way to benchmark QEPAS sensors against each other.
+
+Averaging the output for longer reduces random noise, but only up to the point where slow drift starts to take over. The Allan deviation is used to find this limit. Computing the deviation of the averaged signal as a function of integration time shows the longest useful averaging time and the best stability the sensor can reach~\needcite{Allan deviation analysis for optimal integration time in trace-gas sensing}. This fixes the trade-off between measurement speed and detection limit, and it is reported for the present sensor in \cref{ch:results}.
 
 \section{Spectroscopy of Nitrous Oxide}
 \label{sec:n2o-spectroscopy}
 
-\nto\ has its strongest fundamental ($\nu_3$) near \SI{4.5}{\micro\meter}, but the
-tunable quantum cascade laser used in this work (Daylight Solutions MIRcat-2300)
-covers \SIrange{1111}{2000}{\per\centi\meter} (\SIrange{5}{9}{\micro\meter}).
-The accessible \nto\ feature is therefore the $\nu_1$ fundamental band near
-\SI{7.7}{\micro\meter}; the line used here is at \SI{1297.8}{\per\centi\meter},
-with a secondary line at \SI{1271.5}{\per\centi\meter}. Line selection is made
-with the HITRAN database~\cite{hitran2020}. A key practical issue in this region
-is strong interference from water vapour (\water), which has many lines across
-the \SIrange{1111}{2000}{\per\centi\meter} window (demonstrated in
-\cref{ch:results}). Nitrogen, used as the buffer gas, is essentially
-non-absorbing here.
+Choosing which absorption line to target is a practical design decision rather than a spectroscopy study, and it is set by two things, the lines the analyte offers and the wavelengths the laser can reach. \nto\ absorbs most strongly on its $\nu_3$ fundamental near \SI{4.5}{\micro\meter}, but the tunable quantum cascade laser used in this work (Daylight Solutions MIRcat-2300) covers \SIrange{1111}{2000}{\per\centi\meter}, or about \SIrange{5}{9}{\micro\meter}, and does not reach that band. The accessible feature is instead the weaker $\nu_1$ fundamental near \SI{7.7}{\micro\meter}. The line used for detection is at \SI{1297.8}{\per\centi\meter}, with a second line at \SI{1271.5}{\per\centi\meter} kept as an alternative. Line strengths and positions are taken from the HITRAN database~\needcite{the HITRAN molecular spectroscopic database}.
+
+The same database also shows the main difficulty in this region, which is water vapour. \water\ has many absorption lines across the \SIrange{1111}{2000}{\per\centi\meter} window, and some of them sit close enough to the \nto\ lines to interfere, as the measurements in \cref{ch:results} confirm. The nitrogen used as the buffer gas does not absorb here, so the practical constraint on line selection is to find a strong \nto\ line that also sits clear of the nearby \water\ features.
 
 \section{Related Work}
 \label{sec:related}
 
-Briefly survey prior QEPAS sensors --- especially \nto\ and other QCL-based
-systems --- and state how this work relates to and differs from them.
+QEPAS has been demonstrated for a wide range of trace gases since it was first introduced, and review articles collect the reported sensitivities and the design choices behind them~\needcite{a QEPAS review summarising target gases, transducer design and typical NNEA values}. \nto\ has been measured with QCL-based photoacoustic and QEPAS systems before, both for environmental monitoring and for breath analysis, and many of these use a continuous-wave QCL with wavelength modulation and 2f detection on the stronger bands that such a source can reach~\needcite{one or two representative QCL-based N2O QEPAS sensors, with operating wavelength, detection limit and NNEA}.
+
+The sensor described in this thesis differs in two practical respects. It uses a pulsed QCL with amplitude modulation and 1f detection rather than a continuous-wave source with 2f detection, and it works on the $\nu_1$ band near \SI{7.7}{\micro\meter} that falls inside the tuning range of the available laser. The aim here is not to beat the best reported detection limits but to build and fully characterize a working pulsed-QCL QEPAS platform that can later be retargeted to trace volatile organic compounds, which is the longer-term goal set out in \cref{ch:introduction}.

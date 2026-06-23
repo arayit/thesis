@@ -23,3 +23,9 @@
 % A todo note that stands out while drafting. Comment out the body before
 % your final submission, or wrap with \ifdraft logic if you prefer.
 \newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
+
+% A "citation needed" flag, visually distinct from \todo. Each one names the
+% claim and the kind of source that should support it, so open citation slots
+% are easy to find (grep '\needcite') and fill from trusted references.
+% Never replaced by an invented \cite key. Remove all before submission.
+\newcommand{\needcite}[1]{\textcolor{blue}{\textbf{[CITE: #1]}}}
