@@ -1,46 +1,72 @@
 %==============================================================================
-\chapter{Methodology}
+\chapter{Sensor Design and Experimental Setup}
 \label{ch:methodology}
 %==============================================================================
 
-Describe your proposed approach, system design, models, and experimental setup
-in enough detail that the work could be reproduced.
+This chapter describes the QEPAS sensor built in this work: its optical,
+acoustic, and electronic subsystems, the pulsed amplitude-modulation detection
+scheme, the alignment procedure, and the optical power budget.
 
 \section{System Overview}
 \label{sec:system}
 
-\Cref{fig:example} shows how to include a figure. Place image files in the
-\texttt{figures/} folder and reference them by filename.
+Give the high-level architecture and a block diagram (\cref{fig:setup}): pulsed
+QCL $\rightarrow$ beam-delivery optics $\rightarrow$ ADM (gas cell + QTF)
+$\rightarrow$ transimpedance preamplifier $\rightarrow$ lock-in amplifier
+$\rightarrow$ acquisition. \Cref{tab:params} lists the main system parameters.
 
 \begin{figure}[H]
   \centering
-  % --- Real usage: put your file in figures/ and uncomment the next line ---
-  % \includegraphics[width=0.6\textwidth]{block-diagram.pdf}
-  %
-  % Placeholder below so the project compiles before you add any images.
-  % Delete it once you insert a real figure.
-  \fbox{\parbox[c][4cm][c]{0.6\textwidth}{\centering\itshape
-        Placeholder figure --- replace with \texttt{\textbackslash includegraphics}.}}
-  \caption{Example figure. Replace with your own block diagram or plot.}
-  \label{fig:example}
+  % \includegraphics[width=0.85\textwidth]{setup-block-diagram.pdf}
+  \fbox{\parbox[c][4cm][c]{0.7\textwidth}{\centering\itshape
+        Block diagram of the QEPAS setup --- replace with your own figure.}}
+  \caption{Schematic of the pulsed-QCL QEPAS sensor.}
+  \label{fig:setup}
 \end{figure}
 
-\section{Experimental Setup}
-\label{sec:setup}
+\section{Pulsed Quantum Cascade Laser}
+\label{sec:qcl}
 
-\Cref{tab:example} shows a table built with \texttt{booktabs}.
+Describe the QCL: center wavelength / target \nto\ line
+(\todo{fill in}), pulse parameters (pulse width, repetition rate, duty cycle),
+the current driver, and temperature (TEC) control. Explain how the wavelength is
+scanned across the absorption line via temperature/current tuning.
+
+\section{Amplitude-Modulation Detection Scheme}
+\label{sec:am-scheme}
+
+Explain how the pulse train is modulated at the tuning-fork resonance $f_0$ and
+how the photoacoustic signal is recovered with the lock-in amplifier at 1f.
+State the modulation frequency, lock-in time constant, and filter settings used.
+
+\section{Acoustic Detection Module}
+\label{sec:adm}
+
+Describe the ADM: the quartz tuning fork and acoustic micro-resonator geometry,
+the gas cell, and the gas-handling system (flow, pressure, \nto\ source and
+dilution / calibration mixtures).
+
+\section{Optical Alignment and Power Budget}
+\label{sec:alignment}
+
+Describe the alignment procedure for coupling the QCL beam through the ADM, and
+present the optical power budget --- transmission and losses along the path
+(\cref{tab:params} or a dedicated table). This quantifies how much power reaches
+the QTF, which sets the achievable signal.
 
 \begin{table}[H]
   \centering
-  \caption{Example parameters.}
-  \label{tab:example}
+  \caption{Main system parameters. \todo{Replace with your measured values.}}
+  \label{tab:params}
   \begin{tabular}{lcc}
     \toprule
     Parameter & Symbol & Value \\
     \midrule
-    Sampling frequency & $f_s$  & \SI{1}{\mega\hertz} \\
-    Supply voltage     & $V_{dd}$ & \SI{3.3}{\volt}     \\
-    Number of taps     & $N$    & 64                  \\
+    QCL center wavelength      & $\lambda$ & \SI{4.5}{\micro\meter} (TBD) \\
+    Pulse repetition rate      & $f_{\text{rep}}$ & TBD \\
+    QTF resonance frequency    & $f_0$     & TBD \\
+    QTF quality factor         & $Q$       & TBD \\
+    Lock-in time constant      & $\tau$    & TBD \\
     \bottomrule
   \end{tabular}
 \end{table}

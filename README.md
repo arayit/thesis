@@ -1,8 +1,11 @@
 # M.Sc. Thesis — Özyeğin University (Electrical & Electronics Engineering)
 
-LaTeX source for my Master of Science thesis. Written in English with IEEE-style
-references. Designed to compile on **Overleaf** and to be version-controlled
-with **Git/GitHub**.
+LaTeX source for my Master of Science thesis — a pulsed-QCL QEPAS sensor for
+trace N₂O detection. Written in English with IEEE-style references. Designed to
+compile on **Overleaf** and to be version-controlled with **Git/GitHub**.
+
+📘 **New to thesis writing?** Read [`THESIS-GUIDE.md`](THESIS-GUIDE.md) — scope,
+structure, how a thesis differs from a paper, and a writing plan.
 
 > ⚠️ **Verify formatting against the official guide.** Margins, line spacing,
 > page order, and the wording of the title/approval/declaration pages should

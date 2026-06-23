@@ -3,23 +3,59 @@
 \label{ch:background}
 %==============================================================================
 
-Provide the theoretical background a reader needs, and survey prior work,
-making clear how your thesis differs from or builds upon it.
+This chapter provides the background needed to follow the rest of the thesis:
+the principle of photoacoustic spectroscopy, the QEPAS technique and its
+transducer, the detection scheme used with a pulsed laser, the figures of merit
+used to compare sensors, and the spectroscopy of \nto.
 
-\section{Theoretical Background}
-\label{sec:theory}
+\section{Photoacoustic Spectroscopy}
+\label{sec:pas}
 
-Numbered equations are referenced with \cref{eq:fourier}. The continuous-time
-Fourier transform is
-\begin{equation}
-  \label{eq:fourier}
-  X(f) = \int_{-\infty}^{\infty} x(t)\, e^{-j 2\pi f t}\, \mathrm{d}t .
-\end{equation}
+Explain the photoacoustic effect: modulated optical absorption heats the gas
+periodically, generating a pressure (acoustic) wave that a transducer detects.
+Note that the signal is proportional to the absorbed optical power, so it scales
+with laser power and with analyte concentration.
 
-Inline math and units work together, e.g. a supply voltage of \SI{3.3}{\volt}
-and a sampling rate of \SI{1}{\mega\hertz}.
+\section{Quartz-Enhanced Photoacoustic Spectroscopy (QEPAS)}
+\label{sec:qepas}
+
+Describe how QEPAS replaces the microphone with a quartz tuning fork acting as a
+resonant piezoelectric transducer~\cite{kosterev2002}, optionally with an
+acoustic micro-resonator (the ADM). Discuss the high quality factor $Q$, the
+narrow resonance at $f_0$, and why this gives strong noise immunity and a small
+sampling volume~\cite{patimisco2014}.
+
+\section{Detection Scheme: Amplitude Modulation with a Pulsed QCL}
+\label{sec:detection}
+
+For a continuous-wave laser, wavelength modulation with second-harmonic (2f)
+lock-in detection is common. With a \emph{pulsed} QCL, as used in this thesis,
+the laser intensity is instead modulated at the tuning-fork resonance $f_0$
+(amplitude modulation), and the photoacoustic signal is recovered with a lock-in
+amplifier at the fundamental (1f). The absorption line is scanned by slowly
+tuning the laser wavelength via temperature and/or drive current. Explain the
+trade-offs of pulsed operation (e.g.\ spectral broadening, duty cycle) relative
+to CW.
+
+\section{Figures of Merit}
+\label{sec:fom}
+
+Define the metrics used later: signal-to-noise ratio, the normalized
+noise-equivalent absorption (NNEA, in $\mathrm{cm^{-1}\,W\,Hz^{-1/2}}$),
+minimum detectable concentration, and the use of the Allan deviation to find the
+optimal integration time.
+
+\section{Spectroscopy of Nitrous Oxide}
+\label{sec:n2o-spectroscopy}
+
+Summarize the \nto\ absorption bands and justify the chosen line. The strong
+$\nu_3$ fundamental near \SI{4.5}{\micro\meter} (\todo{confirm: your QCL center
+wavelength / target line, e.g.\ around \SI{2200}{\per\centi\meter}}) is a typical choice.
+Discuss line selection using the HITRAN database~\cite{hitran2020} and the main
+spectral interferents (\cotwo, CO, \water).
 
 \section{Related Work}
 \label{sec:related}
 
-Summarize and critically compare existing approaches~\cite{oppenheim2009}.
+Briefly survey prior QEPAS sensors --- especially \nto\ and other QCL-based
+systems --- and state how this work relates to and differs from them.

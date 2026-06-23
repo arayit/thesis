@@ -3,15 +3,53 @@
 \label{ch:results}
 %==============================================================================
 
-Present your results clearly (figures, tables), then discuss what they mean,
-their limitations, and how they compare to prior work.
+This chapter reports the experimental characterization of the sensor components
+and the \nto\ detection results, followed by a discussion of the achieved
+performance and its limitations.
 
-\section{Results}
-\label{sec:results}
+\section{Tuning-Fork / ADM Characterization}
+\label{sec:adm-char}
 
-Report the outcomes of your experiments.
+Report the measured resonance frequency $f_0$ and quality factor $Q$ of the QTF
+(e.g.\ from a resonance sweep), and any dependence on gas pressure. These set the
+operating modulation frequency and the integration bandwidth.
+
+\section{Lock-In Amplifier Characterization}
+\label{sec:lockin-char}
+
+Report the lock-in characterization: response vs.\ time constant / filter
+settings, noise floor, and the resulting detection bandwidth.
+
+\section{QCL Characterization}
+\label{sec:qcl-char}
+
+Report the QCL output power and its wavelength tuning vs.\ temperature/current,
+which maps drive settings onto the \nto\ absorption line.
+
+\section{Optical Power Budget}
+\label{sec:power-budget}
+
+Present the measured transmission and power losses along the beam path and the
+power delivered to the QTF, comparing with the design budget from
+\cref{sec:alignment}.
+
+\section{Nitrous Oxide Detection}
+\label{sec:n2o-detection}
+
+Show the photoacoustic signal as the laser is scanned across the selected \nto\
+line, and the concentration calibration (signal vs.\ \nto\ concentration),
+commenting on linearity.
+
+\section{Sensitivity and Stability}
+\label{sec:sensitivity}
+
+Report the achieved sensitivity --- signal-to-noise ratio, normalized
+noise-equivalent absorption (NNEA), and minimum detectable concentration --- and
+the Allan-deviation analysis identifying the optimal integration time.
 
 \section{Discussion}
 \label{sec:discussion}
 
-Interpret the results, address threats to validity, and state limitations.
+Interpret the results, compare with values reported in the literature, and
+discuss limitations and sources of uncertainty (e.g.\ pulsed-mode spectral
+broadening, alignment sensitivity, interferents).
