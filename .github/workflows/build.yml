@@ -1,0 +1,46 @@
+name: Build PDF
+
+# Compile the thesis on every push/PR and publish the PDF as a downloadable
+# artifact, so changes can be reviewed without merging to main or pulling into
+# Overleaf. Disable by deleting this file or turning Actions off in repo settings.
+
+on:
+  push:
+    branches:
+      - main
+      - 'claude/**'
+    paths:
+      - '**.tex'
+      - '**.bib'
+      - 'latexmkrc'
+      - '.github/workflows/build.yml'
+  pull_request:
+  workflow_dispatch:
+
+# Cancel an in-flight build when a newer commit lands on the same ref.
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile main.tex (latexmk -> pdflatex + biber)
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: thesis-pdf
+          path: main.pdf
+          if-no-files-found: error
+          retention-days: 21
