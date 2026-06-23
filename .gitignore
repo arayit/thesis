@@ -1,0 +1,31 @@
+## LaTeX build artifacts ------------------------------------------------------
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdv
+*.dvi
+*.idx
+*.ilg
+*.ind
+*.nav
+*.snm
+*.vrb
+
+## The compiled PDF (uncomment if you do NOT want it tracked) ------------------
+# main.pdf
+
+## Editor / OS noise ----------------------------------------------------------
+.DS_Store
+*.swp
+*~
+.vscode/

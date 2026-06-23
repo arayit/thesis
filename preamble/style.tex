@@ -1,0 +1,57 @@
+%==============================================================================
+%  PAGE STYLE  —  margins, line spacing, headers, heading formats.
+%
+%  NOTE: Confirm the exact margins / line spacing against your Graduate
+%  School's official thesis-writing guide. The values below follow the
+%  common Turkish-university convention (extra left margin for binding).
+%==============================================================================
+
+% ---- Margins ----------------------------------------------------------------
+\geometry{
+  a4paper,
+  left=4cm,     % wider left margin for binding
+  right=2.5cm,
+  top=3cm,
+  bottom=2.5cm,
+}
+
+% ---- Line spacing -----------------------------------------------------------
+\onehalfspacing               % 1.5 line spacing (use \doublespacing if required)
+
+% ---- Paragraph style --------------------------------------------------------
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+
+% ---- Headers / footers ------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+% Plain style (chapter opening pages): page number at bottom-center
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+% ---- Chapter / section heading format ---------------------------------------
+\titleformat{\chapter}[display]
+  {\normalfont\Large\bfseries\centering}
+  {\chaptertitlename\ \thechapter}{12pt}{\LARGE}
+\titlespacing*{\chapter}{0pt}{0pt}{24pt}
+
+% ---- Caption style ----------------------------------------------------------
+\captionsetup{font=small, labelfont=bf, labelsep=period}
+
+% ---- hyperref / PDF metadata ------------------------------------------------
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,            % set to e.g. blue while drafting if you prefer
+  citecolor=black,
+  urlcolor=blue,
+  pdftitle={\thesistitle},
+  pdfauthor={\thesisauthor},
+}
+
+% ---- siunitx defaults -------------------------------------------------------
+\sisetup{per-mode=symbol, detect-all}

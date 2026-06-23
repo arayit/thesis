@@ -1,0 +1,2 @@
+# Put your figure files (PDF/PNG/JPG) in this folder.
+# Referenced from chapters as e.g. \includegraphics{block-diagram.pdf}

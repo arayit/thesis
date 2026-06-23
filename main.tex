@@ -1,0 +1,61 @@
+%==============================================================================
+%  M.Sc. Thesis  —  Özyeğin University
+%  Department of Electrical & Electronics Engineering
+%
+%  HOW TO COMPILE
+%    Overleaf : open this project, set  Menu ▸ Main document = main.tex,
+%               Compiler = pdfLaTeX. Overleaf runs biber automatically.
+%    Locally  : latexmk -pdf main.tex      (needs pdfLaTeX + biber)
+%
+%  WHAT TO EDIT
+%    metadata.tex            -> your name, title, advisor, dates, etc.
+%    chapters/*.tex          -> the actual thesis content
+%    references.bib          -> your bibliography (IEEE style)
+%==============================================================================
+\documentclass[12pt,a4paper,oneside]{report}
+
+% ---- Thesis metadata (EDIT THIS FILE) — loaded early so style.tex can use it
+\input{metadata}
+
+% ---- Preamble: packages, page style, custom commands ------------------------
+\input{preamble/packages}
+\input{preamble/commands}
+\input{preamble/style}
+
+\begin{document}
+
+% =============================== FRONT MATTER ================================
+\pagenumbering{roman}
+
+\input{frontmatter/titlepage}
+\input{frontmatter/approval}
+\input{frontmatter/declaration}
+\input{frontmatter/abstract}
+\input{frontmatter/acknowledgements}
+
+\cleardoublepage
+\tableofcontents
+\cleardoublepage
+\listoffigures
+\cleardoublepage
+\listoftables
+% \input{frontmatter/abbreviations}   % optional: list of symbols / abbreviations
+
+% =============================== MAIN MATTER ================================
+\cleardoublepage
+\pagenumbering{arabic}
+
+\input{chapters/01-introduction}
+\input{chapters/02-background}
+\input{chapters/03-methodology}
+\input{chapters/04-results}
+\input{chapters/05-conclusion}
+
+% =============================== BACK MATTER ================================
+\cleardoublepage
+\printbibliography[heading=bibintoc, title={References}]
+
+\appendix
+\input{appendices/appendix-a}
+
+\end{document}

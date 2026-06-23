@@ -1,0 +1,49 @@
+%==============================================================================
+%  PACKAGES
+%  Load order matters for a few of these (hyperref -> biblatex -> cleveref).
+%==============================================================================
+
+% ---- Encoding & language ----------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+% ---- Math (load amsmath/amssymb BEFORE newtxmath to avoid \Bbbk clash) ------
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+% ---- Fonts (Times-like, good for theses) ------------------------------------
+\usepackage{newtxtext}      % Times-like text font
+\usepackage{newtxmath}      % matching math font (after amssymb)
+
+\usepackage{siunitx}        % SI units, e.g. \SI{3.3}{\volt}, \num{1.5e3}
+
+% ---- Page geometry & spacing ------------------------------------------------
+\usepackage{geometry}
+\usepackage{setspace}
+
+% ---- Figures & tables -------------------------------------------------------
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{booktabs}       % professional tables (\toprule, \midrule, ...)
+\usepackage{caption}
+\usepackage{subcaption}     % subfigures
+\usepackage{float}          % [H] float placement
+
+% ---- Lists, color, misc -----------------------------------------------------
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{titlesec}       % chapter/section heading styling (see style.tex)
+\usepackage{fancyhdr}       % page headers/footers (see style.tex)
+
+% ---- Cross-references & links (hyperref must precede biblatex) ---------------
+\usepackage{hyperref}
+\usepackage{csquotes}       % required by biblatex
+
+% ---- Bibliography: IEEE numbered style --------------------------------------
+\usepackage[backend=biber, style=ieee, sorting=none]{biblatex}
+\addbibresource{references.bib}
+
+% ---- Smart cross-references (load AFTER hyperref) ---------------------------
+\usepackage[capitalize, noabbrev]{cleveref}

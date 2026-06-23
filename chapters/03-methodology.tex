@@ -1,0 +1,46 @@
+%==============================================================================
+\chapter{Methodology}
+\label{ch:methodology}
+%==============================================================================
+
+Describe your proposed approach, system design, models, and experimental setup
+in enough detail that the work could be reproduced.
+
+\section{System Overview}
+\label{sec:system}
+
+\Cref{fig:example} shows how to include a figure. Place image files in the
+\texttt{figures/} folder and reference them by filename.
+
+\begin{figure}[H]
+  \centering
+  % --- Real usage: put your file in figures/ and uncomment the next line ---
+  % \includegraphics[width=0.6\textwidth]{block-diagram.pdf}
+  %
+  % Placeholder below so the project compiles before you add any images.
+  % Delete it once you insert a real figure.
+  \fbox{\parbox[c][4cm][c]{0.6\textwidth}{\centering\itshape
+        Placeholder figure --- replace with \texttt{\textbackslash includegraphics}.}}
+  \caption{Example figure. Replace with your own block diagram or plot.}
+  \label{fig:example}
+\end{figure}
+
+\section{Experimental Setup}
+\label{sec:setup}
+
+\Cref{tab:example} shows a table built with \texttt{booktabs}.
+
+\begin{table}[H]
+  \centering
+  \caption{Example parameters.}
+  \label{tab:example}
+  \begin{tabular}{lcc}
+    \toprule
+    Parameter & Symbol & Value \\
+    \midrule
+    Sampling frequency & $f_s$  & \SI{1}{\mega\hertz} \\
+    Supply voltage     & $V_{dd}$ & \SI{3.3}{\volt}     \\
+    Number of taps     & $N$    & 64                  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
