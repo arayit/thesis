@@ -9,52 +9,18 @@ used to compare sensors, and the spectroscopy of \nto.
 \section{Photoacoustic Spectroscopy}
 \label{sec:pas}
 
-Photoacoustic spectroscopy (PAS) is an absorption-based detection technique in
-which the \emph{absorbed} optical power --- rather than the transmitted power ---
-is measured, through the sound that the absorption generates. The effect was
-first reported by Bell in 1880, who found that a periodically interrupted beam of
-sunlight falling on a sample produced an audible tone~\cite{Bell1880}. It
-remained a curiosity until intense, spectrally pure laser sources turned it into
-a practical method for trace-gas analysis~\needcite{review establishing modern
-laser-based photoacoustic spectroscopy for trace-gas sensing}.
+Photoacoustic spectroscopy (PAS) is an absorption-based detection technique in which the \emph{absorbed} optical power --- rather than the transmitted power --- is measured, through the sound that the absorption generates. The effect was first reported by Bell in 1880, who found that a periodically interrupted beam of sunlight falling on a sample produced an audible tone~\cite{Bell1880}. It remained a curiosity until intense, spectrally pure laser sources turned it into a practical method for trace-gas analysis~\needcite{review establishing modern laser-based photoacoustic spectroscopy for trace-gas sensing}.
 
-The mechanism is a short chain of energy conversion. When the laser wavelength
-coincides with a molecular absorption line, analyte molecules are promoted to an
-excited rovibrational state. At the pressures of interest here they relax
-predominantly through non-radiative collisions (vibrational-to-translational, or
-V--T, relaxation), converting the absorbed energy into local heating of the
-gas~\needcite{non-radiative (V--T) relaxation as the origin of the photoacoustic
-signal}. If the incident optical power is modulated at a frequency $f$, the
-heating --- and therefore the local pressure --- is modulated at the same
-frequency, launching an acoustic wave that a suitable transducer detects.
+The mechanism is a short chain of energy conversion. When the laser wavelength coincides with a molecular absorption line, the analyte absorbs the light and releases that energy as heat through molecular collisions. If the incident optical power is modulated at a frequency $f$, the heating --- and therefore the local pressure --- is modulated at the same frequency, launching an acoustic wave that a suitable transducer detects.
 
-For an optically thin sample the absorbed power is $P_\text{abs}=P_0\,\alpha L$,
-where $P_0$ is the incident optical power, $\alpha$ the absorption coefficient,
-and $L$ an interaction length. The absorption coefficient is itself proportional
-to the analyte number density, $\alpha=\sigma N$, with $\sigma$ the absorption
-cross-section. The photoacoustic signal $S$ is therefore proportional to the
-product of laser power and analyte concentration,
+For an optically thin sample the absorbed power is $P_\text{abs}=P_0\,\alpha L$, where $P_0$ is the incident optical power, $\alpha$ the absorption coefficient, and $L$ an interaction length. The absorption coefficient is itself proportional to the analyte number density, $\alpha=\sigma N$, with $\sigma$ the absorption cross-section. The photoacoustic signal $S$ is therefore proportional to the product of laser power and analyte concentration,
 \begin{equation}
   \label{eq:pas-signal}
   S \;=\; K\,P_0\,\alpha \;=\; K\,P_0\,\sigma N,
 \end{equation}
-where the cell constant $K$ collects the transducer responsivity and the cell
-geometry~\needcite{standard photoacoustic signal expression / definition of the
-cell constant}. Two consequences of \cref{eq:pas-signal} matter throughout this
-thesis. First, the technique is intrinsically \emph{zero-background}: with no
-absorption there is no signal, so sensitivity improves simply by raising the
-laser power, unlike a transmission measurement that must resolve a small change
-against a large background. Second, because $S\propto N$, calibrating it against
-known concentrations gives a direct quantitative measurement route, used in
-\cref{ch:results}.
+where the cell constant $K$ collects the transducer responsivity and the cell geometry~\needcite{standard photoacoustic signal expression / definition of the cell constant}. Two consequences of \cref{eq:pas-signal} matter throughout this thesis. First, the technique is intrinsically \emph{zero-background}: with no absorption there is no signal, so sensitivity improves simply by raising the laser power, unlike a transmission measurement that must resolve a small change against a large background. Second, because $S\propto N$, calibrating it against known concentrations gives a direct quantitative measurement route, used in \cref{ch:results}.
 
-Conventionally the transducer is a sensitive microphone in a gas cell whose
-dimensions form an acoustic resonator at $f$, amplifying the
-signal~\needcite{resonant photoacoustic cell with microphone detection}. This
-approach is limited by the microphone's susceptibility to environmental acoustic
-noise and by the relatively large cell volume it requires. The quartz-enhanced
-variant described next removes both limitations by replacing the microphone with
-a sharply resonant quartz tuning fork.
+Conventionally the transducer is a sensitive microphone in a gas cell whose dimensions form an acoustic resonator at $f$, amplifying the signal~\needcite{resonant photoacoustic cell with microphone detection}. This approach is limited by the microphone's susceptibility to environmental acoustic noise and by the relatively large cell volume it requires. The quartz-enhanced variant described next removes both limitations by replacing the microphone with a sharply resonant quartz tuning fork.
 
 \section{Quartz-Enhanced Photoacoustic Spectroscopy (QEPAS)}
 \label{sec:qepas}
