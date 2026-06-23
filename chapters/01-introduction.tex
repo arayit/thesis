@@ -6,50 +6,22 @@
 \section{Motivation}
 \label{sec:motivation}
 
-Nitrous oxide (\nto) is one of the most important long-lived greenhouse gases.
-Its global-warming potential is roughly \num{270} times that of \cotwo\ over a
-100-year horizon, and it is currently among the dominant
-ozone-depleting gases emitted by human activity. \todo{Add exact GWP figure and
-cite (e.g.\ IPCC AR6) and the dominant-ODS claim (Ravishankara \emph{et al.}, 2009).}
-The main anthropogenic sources are agriculture and soil management, combustion,
-and industrial processes, while \nto\ also appears in medical and breath-analysis
-contexts. Monitoring \nto\ at trace (sub-ppm) levels therefore matters for
-climate science, environmental regulation, and health.
+Nitrous oxide (\nto) is one of the most important long-lived greenhouse gases. Its global warming potential is roughly \num{270} times that of \cotwo\ over a 100-year horizon, and it is now among the dominant ozone-depleting gases released by human activity~\needcite{exact GWP-100 value for N2O with source (e.g. the latest IPCC assessment) and the claim that it is now a dominant ozone-depleting emission (e.g. Ravishankara et al. 2009)}. Its main human-made sources are agriculture and soil management, combustion, and industrial processes, and it also shows up in medical use and in exhaled-breath analysis. Measuring \nto\ at trace levels, down to parts per million and below, therefore matters for climate science, for environmental regulation, and for health.
 
-Detecting such low concentrations demands sensors that are sensitive, selective,
-fast, and ideally compact. Laser absorption spectroscopy meets these needs, and
-among its variants \emph{quartz-enhanced photoacoustic spectroscopy} (QEPAS)
-is particularly attractive: it uses a millimetre-scale quartz tuning fork (QTF)
-as a sharply resonant acoustic transducer instead of a microphone, giving an
-immunity to environmental acoustic noise, a very small required gas volume, and
-a wide dynamic range~\cite{kosterev2002, patimisco2014}. Combined with a
-quantum cascade laser (QCL) emitting on a strong \nto\ absorption band in the
-mid-infrared, QEPAS is well suited to compact \nto\ sensing.
+Detecting such low concentrations needs a sensor that is sensitive, selective, fast, and ideally compact. Laser absorption spectroscopy meets these requirements, and among its variants quartz-enhanced photoacoustic spectroscopy (QEPAS) is a good fit for a compact instrument. It replaces the microphone of a conventional photoacoustic cell with a millimetre-scale quartz tuning fork that acts as a sharply resonant acoustic transducer, which gives strong immunity to environmental acoustic noise, needs only a very small gas volume, and offers a wide dynamic range~\needcite{founding QEPAS work and a QEPAS review covering noise immunity, small sample volume and dynamic range}. Pairing this transducer with a quantum cascade laser (QCL) tuned to a strong \nto\ absorption line in the mid-infrared makes a compact and selective \nto\ sensor realistic.
 
-The broader aim of this line of work is the optical detection of trace volatile
-organic compounds (VOCs), such as those emitted by plants. \nto\ is used here
-as a well-characterized reference analyte: it has strong, well-documented
-absorption lines that make it ideal for building and benchmarking the sensor
-before moving to more demanding targets.
+The wider goal behind this work is the optical detection of trace volatile organic compounds (VOCs), such as those released by plants. \nto\ is used here as a well-behaved reference analyte, since it has strong and well-documented absorption lines that make it a good choice for building and benchmarking the sensor before moving on to more demanding targets.
 
 \section{Problem Statement and Objectives}
 \label{sec:objectives}
 
-This thesis concerns the design, construction, and experimental characterization
-of a QCL-based QEPAS sensor, operated with a \emph{pulsed} QCL in
-amplitude-modulation mode, and its validation on \nto. The specific objectives
-are to:
+This thesis covers the design, construction, and experimental characterization of a QCL-based QEPAS sensor, operated with a pulsed QCL in amplitude-modulation mode, and its validation on \nto. The specific objectives are the following.
 \begin{itemize}
-  \item assemble and align the optical, acoustic, and electronic subsystems of
-        the QEPAS sensor;
-  \item characterize the key components --- the quartz tuning fork / acoustic
-        detection module (ADM), the lock-in detection chain, and the pulsed QCL;
-  \item establish an optical power budget for the beam-delivery path;
-  \item select a suitable \nto\ absorption line and demonstrate detection,
-        including a concentration calibration; and
-  \item quantify the sensor's performance: sensitivity (normalized noise-equivalent
-        absorption), minimum detectable concentration, and stability via
-        Allan-deviation analysis.
+  \item Assemble and align the optical, acoustic, and electronic parts of the QEPAS sensor.
+  \item Characterize the key components, namely the quartz tuning fork and acoustic detection module (ADM), the lock-in detection chain, and the pulsed QCL.
+  \item Establish an optical power budget for the beam-delivery path.
+  \item Select a suitable \nto\ absorption line and demonstrate detection, including a concentration calibration.
+  \item Quantify the sensor performance through its sensitivity (normalized noise-equivalent absorption), its minimum detectable concentration, and its stability from an Allan-deviation analysis.
 \end{itemize}
 
 \section{Contributions}
@@ -57,26 +29,13 @@ are to:
 
 The main contributions of this thesis are the following.
 \begin{itemize}
-  \item A complete pulsed-QCL QEPAS sensor, designed and integrated from a
-        tunable quantum cascade laser, a quartz tuning fork detection module, and
-        a lock-in detection chain into a single working instrument.
-  \item An amplitude-modulation detection scheme for a pulsed QCL, together with
-        the external-trigger and reference arrangement that lets the lock-in
-        recover the signal reliably, including a fix for the loss of lock at
-        short pulse widths.
-  \item A full experimental characterization of the instrument, covering the
-        tuning-fork resonance, the lock-in chain, the laser power and tuning, and
-        a wavelength-specific optical power budget for the beam delivery.
-  \item A demonstrated \nto\ detection that validates the complete instrument end
-        to end and provides the foundation for future trace-VOC detection.
+  \item A complete pulsed-QCL QEPAS sensor, designed and integrated from a tunable quantum cascade laser, a quartz tuning fork detection module, and a lock-in detection chain into a single working instrument.
+  \item An amplitude-modulation detection scheme for a pulsed QCL, together with the external-trigger and reference arrangement that lets the lock-in recover the signal reliably, including a fix for the loss of lock at short pulse widths.
+  \item A full experimental characterization of the instrument, covering the tuning-fork resonance, the lock-in chain, the laser power and tuning, and a wavelength-specific optical power budget for the beam delivery.
+  \item A demonstrated \nto\ detection that validates the complete instrument end to end and provides the foundation for future trace-VOC detection.
 \end{itemize}
 
 \section{Thesis Outline}
 \label{sec:outline}
 
-\Cref{ch:background} reviews photoacoustic spectroscopy, the QEPAS technique, and
-the spectroscopy of \nto. \Cref{ch:methodology} describes the sensor design,
-the pulsed amplitude-modulation detection scheme, and the experimental setup.
-\Cref{ch:results} presents the component characterization and \nto\ detection
-results. \Cref{ch:conclusion} concludes and outlines future work toward
-trace-VOC sensing.
+\Cref{ch:background} reviews photoacoustic spectroscopy, the QEPAS technique, and the spectroscopy of \nto. \Cref{ch:methodology} describes the sensor design, the pulsed amplitude-modulation detection scheme, and the experimental setup. \Cref{ch:results} presents the component characterization and the \nto\ detection results. \Cref{ch:conclusion} concludes and outlines future work toward trace-VOC sensing.
