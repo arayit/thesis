@@ -3,53 +3,179 @@
 \label{ch:results}
 %==============================================================================
 
-This chapter reports the experimental characterization of the sensor components
-and the \nto\ detection results, followed by a discussion of the achieved
-performance and its limitations.
+\noindent\emph{Note: the values reported here are from preliminary
+characterization and detection runs (November 2025--March 2026) and are intended
+as a starting point; final, fully calibrated measurements should replace them
+before submission.}\par\bigskip
 
-\section{Tuning-Fork / ADM Characterization}
+This chapter reports the experimental characterization of the sensor's
+subsystems and the first \nto\ detection results, followed by the identification
+of water-vapour interference, the observed pressure dependence, and a discussion
+of the current performance and its limitations.
+
+\section{Tuning-Fork / ADM Resonance Characterization}
 \label{sec:adm-char}
 
-Report the measured resonance frequency $f_0$ and quality factor $Q$ of the QTF
-(e.g.\ from a resonance sweep), and any dependence on gas pressure. These set the
-operating modulation frequency and the integration bandwidth.
+The QTF resonance was located by driving the ADM modulation input with a
+sinusoid from the waveform generator (\SI{100}{\milli\volt} peak-to-peak,
+\SI{50}{\ohm}) and recording the amplified output on the oscilloscope while
+sweeping the drive frequency in \SI{0.1}{\hertz} steps. Starting from the nominal
+\SI{12459.2}{\hertz}, the response fell from \(\approx\)\SI{800}{\milli\volt} to
+\(\approx\)\SI{400}{\milli\volt} within \SI{1}{\hertz}; sweeping downwards, a
+clear maximum of \SI{930}{\milli\volt} (\SI{1.85}{\volt} peak-to-peak) was found at
+\SI{12458.8}{\hertz}. The operating resonance frequency was therefore fixed at
+\begin{equation}
+  \label{eq:f0}
+  f_0 = \SI{12458.8}{\hertz}.
+\end{equation}
+This value is used as the QCL repetition (modulation) frequency throughout.
 
 \section{Lock-In Amplifier Characterization}
 \label{sec:lockin-char}
 
-Report the lock-in characterization: response vs.\ time constant / filter
-settings, noise floor, and the resulting detection bandwidth.
+The EG\&G 5110 lock-in was characterized at $f_0$ by varying the modulation
+amplitude applied to the QTF and recording the demodulated magnitude $R$
+(\cref{fig:lockin}). The response is approximately linear in the input amplitude
+down to \(\approx\)\SI{4}{\milli\volt}, below which the oscilloscope trace loses
+its sinusoidal shape and $R$ becomes unreliable.
 
-\section{QCL Characterization}
+A reproducible instrument artefact was also found: on the \SI{500}{\micro\volt},
+\SI{5}{\milli\volt} and \SI{50}{\milli\volt} sensitivity ranges the analog output
+reads \(\approx\)\SI{40}{\percent} higher than expected when the time constant is
+\(\ge\)\SI{30}{\milli\second}, in both XY and $R$--$\theta$ modes; reducing the
+time constant to \(\le\)\SI{10}{\milli\second} restores the expected value. All
+other ranges are consistent. These three ranges are therefore avoided, or used
+only with short time constants.
+
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=0.7\textwidth]{lockin-linearity.pdf}
+  \fbox{\parbox[c][4cm][c]{0.68\textwidth}{\centering\itshape
+        Lock-in magnitude $R$ vs.\ QTF modulation amplitude at $f_0$
+        (linear region above \(\approx\)\SI{4}{\milli\volt}). Replace with your plot.}}
+  \caption{Lock-in amplifier response characterization at $f_0$.}
+  \label{fig:lockin}
+\end{figure}
+
+\section{QCL Power and Tuning Characterization}
 \label{sec:qcl-char}
 
-Report the QCL output power and its wavelength tuning vs.\ temperature/current,
-which maps drive settings onto the \nto\ absorption line.
+The average output power of the MIRcat-2300 was measured across its tuning range
+for several pulse settings (\cref{fig:qcl-tuning}). The power varies strongly with
+wavelength, from below \SI{1}{\milli\watt} near the band edges to a maximum of
+\(\approx\)\SI{124}{\milli\watt} around \SIrange{7.5}{7.6}{\micro\meter}
+(\SI{100}{\kilo\hertz}, \SI{200}{\nano\second}). At the \nto\ operating line
+(\SI{1297.8}{\per\centi\meter}, \(\approx\)\SI{7.7}{\micro\meter}) the available
+power is ample, and the working point used for detection was \(\approx\)\SI{20}{\milli\watt}
+at \SI{1000}{\nano\second} pulse width. This tuning map also guides line
+selection, since regions of low output power (e.g.\ near \SI{6.2}{\micro\meter})
+cannot be probed effectively.
 
-\section{Optical Power Budget}
-\label{sec:power-budget}
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=0.8\textwidth]{qcl-tuning-curve.pdf}
+  \fbox{\parbox[c][4cm][c]{0.7\textwidth}{\centering\itshape
+        QCL average output power vs.\ wavelength over \SIrange{5}{9}{\micro\meter}.
+        Replace with your measured tuning curve.}}
+  \caption{Measured QCL average output power across the tuning range.}
+  \label{fig:qcl-tuning}
+\end{figure}
 
-Present the measured transmission and power losses along the beam path and the
-power delivered to the QTF, comparing with the design budget from
-\cref{sec:alignment}.
+\section{Optical Power Budget Verification}
+\label{sec:power-budget-results}
 
-\section{Nitrous Oxide Detection}
+After alignment, the input and output powers were compared against the predicted
+two-window transmission of \SI{87.2}{\percent} (\cref{sec:power-budget}). At
+$\lambda = \SI{7.7}{\micro\meter}$ with a \SI{500}{\nano\second} pulse width,
+$P_\text{in} = \SI{3.85}{\milli\watt}$ gave $P_\text{out} = \SI{3.15}{\milli\watt}$;
+the window model predicts \SI{3.35}{\milli\watt}, leaving \(\approx\)\SI{0.2}{\milli\watt}
+of additional loss inside the module. This small residual indicates the beam is
+essentially clearing the prongs and resonator, confirming acceptable alignment.
+
+\section{Detection of Nitrous Oxide}
 \label{sec:n2o-detection}
 
-Show the photoacoustic signal as the laser is scanned across the selected \nto\
-line, and the concentration calibration (signal vs.\ \nto\ concentration),
-commenting on linearity.
+\nto\ was first detected at \SI{1297.8}{\per\centi\meter} with the QCL at
+\SI{1000}{\nano\second} / \SI{20}{\milli\watt}, \SI{100}{\ppm} \nto\ in a closed
+chamber at \SI{500}{\torr}. The lock-in, in \%FS $R$--$\theta$ mode at
+\SI{20}{\milli\volt} sensitivity, showed a stable photoacoustic signal of
+\(\approx\)\SI{12}{\milli\volt}. Toggling the laser and the gas flow off and on
+removed the signal in every case, confirming that the reading is a genuine
+photoacoustic response to \nto\ and not an electrical or background artefact.
 
-\section{Sensitivity and Stability}
-\label{sec:sensitivity}
+Two \nto\ lines were then compared (\SI{800}{\nano\second}, \SI{100}{\ppm},
+\SI{600}{\torr}): \SI{1297.8}{\per\centi\meter} (\SI{22}{\milli\watt}) and
+\SI{1271.5}{\per\centi\meter} (\SI{19}{\milli\watt}) gave \SI{14.0}{\milli\volt}
+and \SI{15.5}{\milli\volt} respectively (\cref{tab:n2o}).
 
-Report the achieved sensitivity --- signal-to-noise ratio, normalized
-noise-equivalent absorption (NNEA), and minimum detectable concentration --- and
-the Allan-deviation analysis identifying the optimal integration time.
+\begin{table}[H]
+  \centering
+  \caption{Photoacoustic signal at two \nto\ lines (\SI{100}{\ppm}, \SI{600}{\torr},
+           \SI{800}{\nano\second}).}
+  \label{tab:n2o}
+  \begin{tabular}{ccc}
+    \toprule
+    Line (\si{\per\centi\meter}) & QCL power (\si{\milli\watt}) & Signal (\si{\milli\volt}) \\
+    \midrule
+    1297.8 & 22 & 14.0 \\
+    1271.5 & 19 & 15.5 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Spectral Interference from Water Vapour}
+\label{sec:h2o}
+
+When the laser was tuned to a nominally non-absorbing region near
+\SI{1400}{\per\centi\meter} as a control, strong signals were nonetheless
+observed. Scanning the QCL revealed peaks at \num{1456.9}, \num{1405.2},
+\num{1288.5} and \SI{1287.5}{\per\centi\meter} (\num{15.0}, \num{29.0},
+\num{23.0} and \SI{28.3}{\milli\volt}), and further peaks near
+\num{1798.5} and \SI{1772.7}{\per\centi\meter} (\num{16} and \SI{20}{\milli\volt}).
+Cross-referencing with HITRAN~\cite{hitran2020} attributes these to water vapour
+(\water) present in the chamber; nitrogen shows no absorption in this window.
+Water-vapour interference is thus a significant practical issue for \nto\
+detection in this spectral region (\cref{fig:h2o}) and motivates either gas
+drying or careful line selection away from \water\ features.
+
+\begin{figure}[H]
+  \centering
+  % \includegraphics[width=0.85\textwidth]{h2o-hitran.pdf}
+  \fbox{\parbox[c][4cm][c]{0.75\textwidth}{\centering\itshape
+        \water\ absorption over \SIrange{1111}{2000}{\per\centi\meter} (HITRAN),
+        with the observed interference peaks marked. Replace with your figure.}}
+  \caption{Water-vapour absorption spectrum from HITRAN in the QCL tuning window.}
+  \label{fig:h2o}
+\end{figure}
+
+\section{Pressure Dependence}
+\label{sec:pressure}
+
+The photoacoustic signal increased approximately linearly with chamber pressure
+over the range explored. Purging with N\textsubscript{2} while pumping reduced
+the pressure to \SIrange{60}{70}{\torr} and brought the lock-in reading to
+essentially zero; whether this is due to the low pressure itself or to the
+removal of residual absorbers (including \water) was not separated and remains an
+open question. \todo{Add a controlled signal-vs-pressure measurement at fixed
+concentration.}
 
 \section{Discussion}
 \label{sec:discussion}
 
-Interpret the results, compare with values reported in the literature, and
-discuss limitations and sources of uncertainty (e.g.\ pulsed-mode spectral
-broadening, alignment sensitivity, interferents).
+These results demonstrate a working pulsed-QCL QEPAS sensor that detects \nto\ at
+the \SIrange{50}{100}{\ppm} level and a complete, characterized detection chain.
+A background measurement highlights the main current limitation:
+at the non-absorbing line \SI{1340}{\per\centi\meter} the lock-in read
+\SI{1.08}{\milli\volt} (\SI{3.18}{\milli\watt}), rising only to
+\SI{1.52}{\milli\volt} at \SI{1297.8}{\per\centi\meter} (\SI{3.23}{\milli\watt}).
+The large wavelength-independent background --- despite an in-module loss of only
+\(\approx\)\SI{0.2}{\milli\watt} --- points to residual beam clipping / wall
+heating from imperfect alignment rather than window loss, and currently limits
+the achievable detection limit.
+
+The remaining work is to suppress this background (alignment, gas drying), and
+then to convert the measured signals into quantitative figures of merit: a
+concentration calibration curve, the normalized noise-equivalent absorption
+(NNEA), the minimum detectable concentration, and an Allan-deviation analysis of
+the optimal integration time. Water-vapour interference and the pressure
+dependence should be characterized systematically as part of this.

@@ -48,11 +48,17 @@ optimal integration time.
 \section{Spectroscopy of Nitrous Oxide}
 \label{sec:n2o-spectroscopy}
 
-Summarize the \nto\ absorption bands and justify the chosen line. The strong
-$\nu_3$ fundamental near \SI{4.5}{\micro\meter} (\todo{confirm: your QCL center
-wavelength / target line, e.g.\ around \SI{2200}{\per\centi\meter}}) is a typical choice.
-Discuss line selection using the HITRAN database~\cite{hitran2020} and the main
-spectral interferents (\cotwo, CO, \water).
+\nto\ has its strongest fundamental ($\nu_3$) near \SI{4.5}{\micro\meter}, but the
+tunable quantum cascade laser used in this work (Daylight Solutions MIRcat-2300)
+covers \SIrange{1111}{2000}{\per\centi\meter} (\SIrange{5}{9}{\micro\meter}).
+The accessible \nto\ feature is therefore the $\nu_1$ fundamental band near
+\SI{7.7}{\micro\meter}; the line used here is at \SI{1297.8}{\per\centi\meter},
+with a secondary line at \SI{1271.5}{\per\centi\meter}. Line selection is made
+with the HITRAN database~\cite{hitran2020}. A key practical issue in this region
+is strong interference from water vapour (\water), which has many lines across
+the \SIrange{1111}{2000}{\per\centi\meter} window (demonstrated in
+\cref{ch:results}). Nitrogen, used as the buffer gas, is essentially
+non-absorbing here.
 
 \section{Related Work}
 \label{sec:related}

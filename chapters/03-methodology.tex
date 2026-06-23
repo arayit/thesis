@@ -3,70 +3,173 @@
 \label{ch:methodology}
 %==============================================================================
 
-This chapter describes the QEPAS sensor built in this work: its optical,
-acoustic, and electronic subsystems, the pulsed amplitude-modulation detection
-scheme, the alignment procedure, and the optical power budget.
+This chapter describes the QEPAS sensor built in this work: the pulsed quantum
+cascade laser source, the acoustic detection module, the amplitude-modulation
+detection and lock-in recovery scheme, the beam-delivery optics and alignment
+procedure, the optical power budget, and the gas-handling system.
 
 \section{System Overview}
 \label{sec:system}
 
-Give the high-level architecture and a block diagram (\cref{fig:setup}): pulsed
-QCL $\rightarrow$ beam-delivery optics $\rightarrow$ ADM (gas cell + QTF)
-$\rightarrow$ transimpedance preamplifier $\rightarrow$ lock-in amplifier
-$\rightarrow$ acquisition. \Cref{tab:params} lists the main system parameters.
+The sensor follows a standard QEPAS architecture (\cref{fig:setup}). A pulsed,
+tunable quantum cascade laser (QCL) is tuned onto a \nto\ absorption line and
+pulsed at the resonance frequency of a quartz tuning fork (QTF) housed in a
+commercial acoustic detection module (ADM). The beam is steered and focused
+between the QTF prongs by a two-mirror system. Periodic optical absorption by
+\nto\ generates an acoustic wave that drives the QTF at resonance; the resulting
+piezoelectric current is amplified by the ADM's integrated preamplifier and
+demodulated by a lock-in amplifier referenced to the laser pulse train. A
+mass-flow / pressure system sets the \nto\ concentration and chamber pressure.
+The main parameters are listed in \cref{tab:params}.
 
 \begin{figure}[H]
   \centering
-  % \includegraphics[width=0.85\textwidth]{setup-block-diagram.pdf}
-  \fbox{\parbox[c][4cm][c]{0.7\textwidth}{\centering\itshape
-        Block diagram of the QEPAS setup --- replace with your own figure.}}
+  % \includegraphics[width=0.9\textwidth]{setup-block-diagram.pdf}
+  \fbox{\parbox[c][4.5cm][c]{0.78\textwidth}{\centering\itshape
+        QEPAS setup schematic (QCL $\rightarrow$ steering mirror $\rightarrow$
+        off-axis parabolic mirror $\rightarrow$ ADM; ADM preamp $\rightarrow$
+        lock-in; gas-handling rig). Replace with your block diagram /
+        ``QEPAS setup schematic'' figure.}}
   \caption{Schematic of the pulsed-QCL QEPAS sensor.}
   \label{fig:setup}
 \end{figure}
 
-\section{Pulsed Quantum Cascade Laser}
+\begin{table}[H]
+  \centering
+  \caption{Main system parameters.}
+  \label{tab:params}
+  \begin{tabular}{lll}
+    \toprule
+    Subsystem & Parameter & Value \\
+    \midrule
+    QCL  & Source                & Daylight Solutions MIRcat-2300 \\
+         & Tuning range          & \SIrange{1111}{2000}{\per\centi\meter} (\SIrange{5}{9}{\micro\meter}) \\
+         & \nto\ line (primary)  & \SI{1297.8}{\per\centi\meter} (\(\approx\)\,\SI{7.7}{\micro\meter}) \\
+         & Pulse width           & \SIrange{500}{1000}{\nano\second} \\
+         & Repetition / mod.\ freq. & $f_0 = \SI{12458.8}{\hertz}$ (external trigger) \\
+    ADM  & Module                & Thorlabs ADM01 \\
+         & QTF resonance $f_0$    & \SI{12458.8}{\hertz} \\
+         & Windows               & BaF\textsubscript{2}, wedged, \(\approx\)\,\SI{2.5}{\milli\meter} \\
+    Optics & Focusing mirror     & gold OAP, MPD149-M01, RFL \SI{101.6}{\milli\meter} \\
+         & Focused beam waist    & \(\approx\)\,\SI{100}{\micro\meter} \\
+         & Two-window transmission & \SI{87.2}{\percent} \\
+    Lock-in & Amplifier          & EG\&G 5110 \\
+    Gas  & Chamber pressure      & \SIrange{500}{600}{\torr} \\
+         & \nto\ concentration   & \SIrange{50}{100}{\ppm} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Excitation Source: Pulsed Quantum Cascade Laser}
 \label{sec:qcl}
 
-Describe the QCL: center wavelength / target \nto\ line
-(\todo{fill in}), pulse parameters (pulse width, repetition rate, duty cycle),
-the current driver, and temperature (TEC) control. Explain how the wavelength is
-scanned across the absorption line via temperature/current tuning.
-
-\section{Amplitude-Modulation Detection Scheme}
-\label{sec:am-scheme}
-
-Explain how the pulse train is modulated at the tuning-fork resonance $f_0$ and
-how the photoacoustic signal is recovered with the lock-in amplifier at 1f.
-State the modulation frequency, lock-in time constant, and filter settings used.
+The excitation source is a Daylight Solutions MIRcat-2300 tunable QCL, capable
+of emitting between \SI{1111}{\per\centi\meter} and \SI{2000}{\per\centi\meter}
+(\SIrange{5}{9}{\micro\meter}). It is operated in pulsed mode and tuned onto the
+\nto\ $\nu_1$ line at \SI{1297.8}{\per\centi\meter}. The laser is driven in
+\emph{external-trigger} mode: a waveform generator (Rigol DG922\,Pro) supplies a
+\SI{5}{\volt} (peak-to-peak) TTL pulse train at the QTF resonance frequency
+$f_0 = \SI{12458.8}{\hertz}$ to the QCL \texttt{TRIG IN} input (high impedance,
+pulse mode), so that one laser pulse is emitted per QTF oscillation period. This
+constitutes the amplitude modulation of the optical power at $f_0$. Average
+optical power is monitored with an Ophir Nova~II power meter.
 
 \section{Acoustic Detection Module}
 \label{sec:adm}
 
-Describe the ADM: the quartz tuning fork and acoustic micro-resonator geometry,
-the gas cell, and the gas-handling system (flow, pressure, \nto\ source and
-dilution / calibration mixtures).
+The transducer is a Thorlabs ADM01 acoustic detection module, comprising a
+quartz tuning fork with an acoustic micro-resonator and an integrated
+transimpedance preamplifier (powered at \(\pm\)\SI{12}{\volt} from a Keysight
+E361A supply). The module has wedged, uncoated BaF\textsubscript{2} windows of
+\(\approx\)\SI{2.5}{\milli\meter} thickness. The measured fork resonance is
+$f_0 = \SI{12458.8}{\hertz}$ (\cref{sec:adm-char}). The ADM is mounted on a
+five-axis translation stage (Thorlabs PY005) to allow the beam to be centred
+between the fork prongs, whose gap is \(\approx\)\SI{0.8}{\milli\meter}.
 
-\section{Optical Alignment and Power Budget}
+\section{Amplitude-Modulation Detection and Lock-In Recovery}
+\label{sec:am-scheme}
+
+Because the QCL is pulsed, detection uses amplitude modulation rather than
+wavelength-modulation: the pulse train at $f_0$ excites the QTF at resonance, and
+the photoacoustic signal is recovered at the fundamental (1f) with an EG\&G 5110
+lock-in amplifier connected to the ADM signal output. The lock-in reference is
+derived from the QCL \texttt{TRIG OUT} port, which emits a \SI{5}{\volt} TTL
+level while the laser is firing.
+
+Two practical issues were addressed. First, below a pulse width of
+\(\approx\)\SI{400}{\nano\second} the lock-in fails to lock to the
+\texttt{TRIG OUT} reference (\texttt{UNLK} indicator). This is solved by using a
+second waveform-generator channel as a \emph{dummy reference} with a fixed
+\SI{500}{\nano\second} pulse width, phase-matched to \texttt{TRIG OUT} (a phase
+offset of \(\approx\)\ang{217.4} compensates the QCL internal-electronics delay).
+Second, at sensitivity settings of \SI{500}{\micro\volt}, \SI{5}{\milli\volt} and
+\SI{50}{\milli\volt} the analog output reads \(\approx\)\SI{40}{\percent} high
+for time constants \(\ge\)\SI{30}{\milli\second}; these settings are therefore
+avoided (see \cref{sec:lockin-char}).
+
+\section{Beam Delivery and Alignment}
 \label{sec:alignment}
 
-Describe the alignment procedure for coupling the QCL beam through the ADM, and
-present the optical power budget --- transmission and losses along the path
-(\cref{tab:params} or a dedicated table). This quantifies how much power reaches
-the QTF, which sets the achievable signal.
+The QCL emits a collimated beam of waist $w_0 = \SI{2.5}{\milli\meter}$. A
+gold-coated plane mirror steers the beam by \ang{90} into a gold-coated off-axis
+parabolic (OAP) mirror (Thorlabs MPD149-M01, reflected focal length
+$f = \SI{101.6}{\milli\meter}$), which focuses it into the ADM. For a Gaussian
+beam, the focused waist is
+\begin{equation}
+  \label{eq:focus}
+  w_0' \approx \frac{\lambda f}{\pi w_0} \approx \SI{100}{\micro\meter},
+\end{equation}
+at $\lambda = \SI{7.7}{\micro\meter}$, with a Rayleigh range
+$z_R \approx \SI{4.1}{\milli\meter}$. The QTF is placed at the focus; at the
+entrance window (\(\approx\)\SI{22.1}{\milli\meter} before the focus) the beam
+diameter is \(\approx\)\SI{1.1}{\milli\meter}, comfortably below the
+\(\approx\)\SI{1.6}{\milli\meter} clear aperture of the ADM.
 
-\begin{table}[H]
-  \centering
-  \caption{Main system parameters. \todo{Replace with your measured values.}}
-  \label{tab:params}
-  \begin{tabular}{lcc}
-    \toprule
-    Parameter & Symbol & Value \\
-    \midrule
-    QCL center wavelength      & $\lambda$ & \SI{4.5}{\micro\meter} (TBD) \\
-    Pulse repetition rate      & $f_{\text{rep}}$ & TBD \\
-    QTF resonance frequency    & $f_0$     & TBD \\
-    QTF quality factor         & $Q$       & TBD \\
-    Lock-in time constant      & $\tau$    & TBD \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+Alignment proceeds by first making the beam parallel to the optical axis with the
+plane mirror, then setting the OAP at the focal distance and orienting it to
+inject the beam through the entrance window; the five-axis stage is then used to
+maximise the transmitted power at the output window. Comparing input and output
+power against the predicted window transmission (\cref{sec:power-budget})
+confirms that the beam clears the prongs and resonator without clipping.
+
+\section{Optical Power Budget}
+\label{sec:power-budget}
+
+The expected transmission through the BaF\textsubscript{2} windows is estimated
+by combining the Fresnel reflection at each interface with Beer--Lambert bulk
+absorption,
+\begin{equation}
+  \label{eq:window}
+  T_\text{window} = (1-R)^2 \, e^{-\mu_a d},
+  \qquad
+  R = \left(\frac{n-1}{n+1}\right)^2 ,
+\end{equation}
+where $n$ is the BaF\textsubscript{2} refractive index from the Sellmeier
+relation. At $\lambda = \SI{7.7}{\micro\meter}$, $n = 1.429$, giving
+$R \approx 0.0312$ and a single-interface transmission of \(\approx\)\SI{96.9}{\percent}.
+The bulk absorption coefficient $\mu_a \approx \SI{1.9e-3}{\per\milli\meter}$ is
+obtained from the manufacturer's \SI{92.07}{\percent} transmission for a
+\SI{10}{\milli\meter} sample. For the \SI{2.5}{\milli\meter} ADM windows this
+yields $T_\text{window} \approx \SI{93.4}{\percent}$ per window, and, applying
+\cref{eq:window} to both the entrance and exit windows,
+$T_\text{total} \approx \SI{87.2}{\percent}$ (a \SI{12.8}{\percent} loss). This
+wavelength-specific figure is used during alignment to distinguish genuine window
+loss from clipping inside the module.
+
+\section{Gas Handling and Concentration Control}
+\label{sec:gas}
+
+The gas line uses two Alicat mass-flow controllers (MFCs): an MC-10SCCM-D
+(\(\le\)\SI{10}{\sccm}) delivering the analyte (a certified \SI{100}{\ppm} \nto\
+in N\textsubscript{2} cylinder) and an MC-200SCCM-D/5M delivering N\textsubscript{2}
+buffer. Their outputs are combined and fed to an Alicat PCD-15PSIA pressure
+controller that regulates the ADM chamber pressure (one port to the closed ADM,
+one to a Vacuubrand MZ-2C-NT pump exhausting to the fume hood). Flows are set in
+the FlowVision v2.1.3 software. The delivered concentration is
+\begin{equation}
+  \label{eq:conc}
+  C = c_0 \, \frac{F_\text{\nto}}{F_\text{\nto} + F_{\mathrm{N_2}}},
+\end{equation}
+where $c_0 = \SI{100}{\ppm}$ is the cylinder concentration and $F$ are the flow
+rates; equal flows therefore give \SI{50}{\ppm}. Chamber pressure was typically
+\SIrange{500}{600}{\torr}.
