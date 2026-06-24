@@ -46,6 +46,7 @@ Nothing downstream finalizes until these are measured.
 
 ## 4. Figures (replace the placeholder boxes)
 
+- [x] Lock-in / phase-sensitive detection block diagram (§2.3) — done (`figures/lockin-blockdiagram.pdf`)
 - [ ] 2D system block diagram with the lock-in chain — *you*
 - [ ] 3D Blender setup render — *you*
 - [ ] Focusing guide + Gaussian-beam figure — *Claude can draft*

@@ -54,7 +54,14 @@ a steady term proportional to the signal amplitude plus a term at twice the freq
 
 The same multiplication rejects the noise. A noise component at a frequency $f$ is shifted by the mixing to a beat at $f - f_0$, so only components within a narrow band set by the low-pass filter land close enough to zero frequency to pass, and everything else averages away. The lock-in therefore acts as an extremely narrow band-pass filter centred on $f_0$, with a bandwidth fixed by the filter time constant. This is why the time constant is a central setting that trades response speed against noise, a point taken up with the figures of merit in \cref{sec:fom}.
 
-The steady output in \cref{eq:psd} still depends on the phase $\varphi$ between the signal and the reference, and it falls to zero when the two are \ang{90} apart. A modern lock-in removes this dependence by demodulating against two references \ang{90} apart at the same time, which yields the in-phase component $X$ and the quadrature component $Y$. From these it forms the magnitude $R = \sqrt{X^2 + Y^2}$ and the phase $\theta = \arctan(Y/X)$, where $R$ no longer depends on the signal phase. The measurements in this work use this magnitude ($R$--$\theta$) mode, which removes the need to hold a fixed phase between the photoacoustic signal and the reference.
+The steady output in \cref{eq:psd} still depends on the phase $\varphi$ between the signal and the reference, and it falls to zero when the two are \ang{90} apart. A modern lock-in removes this dependence by demodulating against two references \ang{90} apart at the same time, which yields the in-phase component $X$ and the quadrature component $Y$ (\cref{fig:lockin}). From these it forms the magnitude $R = \sqrt{X^2 + Y^2}$ and the phase $\theta = \arctan(Y/X)$, where $R$ no longer depends on the signal phase. The measurements in this work use this magnitude ($R$--$\theta$) mode, which removes the need to hold a fixed phase between the photoacoustic signal and the reference.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.92\textwidth]{lockin-blockdiagram.pdf}
+  \caption{Dual-phase lock-in (phase-sensitive) detection. The input at $f_0$ is multiplied by two references \ang{90} apart; each product is low-pass filtered (LPF) to give the in-phase ($X$) and quadrature ($Y$) components, from which the magnitude $R$ and phase $\theta$ are computed.}
+  \label{fig:lockin}
+\end{figure}
 
 To record a spectrum the laser wavelength is tuned slowly across the line while the modulation at $f_0$ continues, which traces out the absorption feature point by point. This slow tuning is done through the laser temperature and drive current.
 
