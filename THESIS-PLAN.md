@@ -52,9 +52,10 @@ Nothing downstream finalizes until these are measured.
 - [ ] QCL power/tuning curve — *Claude from `experimental/*.xlsx`*
 - [ ] Results plots: ADM resonance, lock-in linearity, N₂O calibration, H₂O/HITRAN, Allan
 
-## 5. Citations still needed (3)
+## 5. Citations still needed (4)
 
 - [ ] Intro: N₂O GWP value + dominant-ozone-depleter claim (IPCC AR6, Ravishankara 2009)
+- [ ] §2.3: quantum cascade laser operating principle (Faist et al. 1994, or a QCL review)
 - [ ] §2.3: intrapulse heating / spectral broadening in pulsed QCLs
 - [ ] §2.5: HITRAN (Gordon et al. 2022) — also clears the lone `[?]` in Results
 
