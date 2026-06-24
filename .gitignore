@@ -21,8 +21,8 @@
 *.snm
 *.vrb
 
-## The compiled PDF (uncomment if you do NOT want it tracked) ------------------
-# main.pdf
+## The compiled PDF (regenerated on every build; not tracked) -----------------
+main.pdf
 
 ## Editor / OS noise ----------------------------------------------------------
 .DS_Store
