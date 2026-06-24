@@ -36,6 +36,13 @@ Nothing downstream finalizes until these are measured.
 - [ ] No-gas / non-absorbing-line background (noise floor)
 - [ ] One long fixed-condition recording for the Allan deviation (≥ 1000 s)
 - [ ] Controlled signal-vs-pressure measurement (§4.7)
+- [ ] ADM resonance frequency sweep around f₀ (fine sub-Hz steps) → resonance curve + Q = f₀/Δf
+
+Lock-in / detection-chain characterization (bench, no gas needed):
+- [ ] Noise vs time constant → equivalent noise bandwidth Δf for the NNEA (confirm noise ∝ 1/√τ) — most important
+- [ ] Compare 6 vs 12 dB/oct filter slope; settle on one and record its Δf
+- [ ] Frequency selectivity around f₀ (R vs small input-frequency offset)
+- [ ] Linearity across the sensitivity ranges actually used; document the +40% artifact ranges
 
 ## 3. After data — analysis & writing (Claude can do)
 
