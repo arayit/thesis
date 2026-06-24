@@ -6,17 +6,21 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-Summarize what was accomplished: the design and construction of a pulsed-QCL
-QEPAS sensor, the characterization of its tuning fork / ADM, lock-in chain, and
-QCL, the optical power budget, and the validated detection of \nto\ with its
-measured sensitivity and stability. Restate the headline performance numbers and
-why they matter.
+This thesis set out to design, build, and experimentally characterize a pulsed-QCL QEPAS sensor and to validate it on \nto, and that goal has been met. A complete instrument was assembled from a tunable quantum cascade laser, a quartz tuning fork housed in a commercial acoustic detection module, and a lock-in detection chain, and it was operated end to end to detect \nto\ in a controlled gas mixture.
+
+The main outcomes of the work are the following.
+\begin{itemize}
+  \item A working pulsed-QCL QEPAS sensor was designed and integrated as a single instrument, with its optical, acoustic, and electronic subsystems aligned and brought into operation.
+  \item A pulsed amplitude-modulation detection scheme was implemented, including the external-trigger and reference arrangement that recovers the photoacoustic signal reliably and a fix for the loss of lock at short pulse widths.
+  \item The subsystems were characterized individually, covering the tuning-fork resonance at $f_0 = \SI{12458.8}{\hertz}$, the linear range of the lock-in chain, the laser power and tuning across \SIrange{5}{9}{\micro\meter}, and a wavelength-specific two-window optical transmission of about \SI{87.2}{\percent}.
+  \item \nto\ was detected on its $\nu_1$ band near \SI{7.7}{\micro\meter}, and the strong water-vapour interference in this region was identified and attributed using the HITRAN database.
+\end{itemize}
+
+The full quantitative performance of the sensor, namely the concentration calibration, the normalized noise-equivalent absorption, the minimum detectable concentration, and the optimal integration time from an Allan-deviation analysis, will be reported once the final measurements are complete. \todo{Insert the headline figures (NNEA, minimum detectable concentration, optimal integration time) here once measured.} Even so, the work already demonstrates a complete and characterized detection chain that responds to \nto\ and behaves as expected when the laser, the gas flow, and the chamber pressure are changed.
 
 \section{Future Work}
 \label{sec:future}
 
-Outline the next steps. The primary direction is extending the platform from
-\nto\ to the detection of trace volatile organic compounds (VOCs), such as
-plant-emitted VOCs, with the goal of a research publication. Discuss the
-improvements this may require (e.g.\ line selection for the target VOC, higher
-sensitivity, interference handling, and calibration).
+Two lines of work follow from this thesis. The first is to finish quantifying and improving the present sensor. The discussion in \cref{ch:results} traced the current detection limit to a large wavelength-independent background from imperfect alignment, so better alignment and gas drying should lower this background and improve the sensitivity. Completing the concentration calibration, the NNEA, the minimum detectable concentration, and the Allan-deviation analysis will then give a full performance figure for the instrument.
+
+The second and broader direction is to retarget the platform from \nto\ to trace volatile organic compounds, such as those emitted by plants, which is the motivation behind this work. \nto\ served here as a well-behaved reference analyte with strong and well-documented absorption lines. Moving to volatile organic compounds will require selecting suitable lines for the target molecule within the laser tuning range, handling interference from water vapour and other broadband absorbers, and most likely improving the sensitivity further, for example with a custom tuning fork or an optimized acoustic micro-resonator of the kind used in recent QEPAS sensors~\cite{lin2023, chen2025}. This direction is the intended subject of future work and a planned research publication.
