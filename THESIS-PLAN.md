@@ -50,7 +50,7 @@ Nothing downstream finalizes until these are measured.
 - [ ] 2D system block diagram with the lock-in chain — *you*
 - [ ] 3D Blender setup render — *you*
 - [ ] Focusing guide + Gaussian-beam figure — *Claude can draft*
-- [ ] QCL power/tuning curve — *Claude from `experimental/*.xlsx`*
+- [x] QCL power/tuning curve (§4.3) — done (`figures/qcl-tuning-curve.pdf`)
 - [ ] Results plots: ADM resonance, lock-in linearity, N₂O calibration, H₂O/HITRAN, Allan
 
 ## 5. Citations still needed (~19 flags)
