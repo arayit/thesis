@@ -1,33 +1,50 @@
-\documentclass[12pt,a4paper,oneside]{report}
+%==============================================================================
+%  MSc thesis -- Ozyegin University, Graduate School of Science and Engineering
+%  Built on the official OzU thesis class (ozu-thesis.cls), which provides the
+%  required title page, approval (signature) page, declaration, abstract, Turkish
+%  ozet, margins, fonts and IEEE bibliography automatically.
+%
+%  Compile on Overleaf with pdfLaTeX (Main document = main.tex), or locally:
+%      pdflatex main && bibtex main && pdflatex main && pdflatex main
+%==============================================================================
 
-\input{metadata}
+\documentclass[12pt,a4paper,hyperref]{ozu-thesis}
 
-\input{preamble/packages}
-\input{preamble/commands}
-\input{preamble/style}
+\input{preamble/packages}   % extra packages: units, refs, captions, links
+\input{preamble/commands}   % custom macros: \nto, units, \todo, \needcite
+
+\input{metadata}            % title, author, advisor, jury, dates, \bibfiles
 
 \begin{document}
 
-\pagenumbering{roman}
+% Standard IEEE transactions style; citations in order of appearance.
+\bibliographystyle{ieeetr}
 
-\input{frontmatter/titlepage}
-\input{frontmatter/approval}
-\input{frontmatter/declaration}
-\input{frontmatter/abstract}
-\input{frontmatter/acknowledgements}
+\begin{preliminary}
 
-\cleardoublepage
-\tableofcontents
-\cleardoublepage
-\listoffigures
-\cleardoublepage
-\listoftables
+  \begin{originality}
+    \input{frontmatter/declaration}
+  \end{originality}
 
-\cleardoublepage
-\input{frontmatter/abbreviations}
+  \begin{abstract}
+    \input{frontmatter/abstract}
+  \end{abstract}
 
-\cleardoublepage
-\pagenumbering{arabic}
+  \begin{ozetce}
+    \input{frontmatter/ozet}
+  \end{ozetce}
+
+  \begin{acknowledgements}
+    \input{frontmatter/acknowledgements}
+  \end{acknowledgements}
+
+  % Table of contents, list of figures, list of tables.
+  \contents
+
+  % List of acronyms and abbreviations (after the lists).
+  \input{frontmatter/acronyms}
+
+\end{preliminary}
 
 \input{chapters/01-introduction}
 \input{chapters/02-background}
@@ -35,10 +52,22 @@
 \input{chapters/04-results}
 \input{chapters/05-conclusion}
 
-\cleardoublepage
-\printbibliography[heading=bibintoc, title={References}]
+\begin{postliminary}
 
-\appendix
-\input{appendices/appendix-a}
+  \references
+
+  \newpage
+  \vspace*{\stretch{1}}
+  \begin{center}
+    \normalfont\large\textbf{APPENDICES}
+  \end{center}
+  \bigskip\bigskip\vspace*{\stretch{1}}
+  \addcontentsline{toc}{chapter}{\texorpdfstring{\Makeuppercase{APPENDICES}}{APPENDICES}}
+  \newpage
+
+  \appendix
+  \input{appendices/appendix-a}
+
+\end{postliminary}
 
 \end{document}

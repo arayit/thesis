@@ -1,49 +1,54 @@
 %==============================================================================
-%  PACKAGES
-%  Load order matters for a few of these (hyperref -> biblatex -> cleveref).
+%  PACKAGES (extra to those loaded by ozu-thesis.cls)
+%  The class already loads: report base, times font, calc, tocloft.
+%  Margins, line spacing, headers, title/approval pages are handled by the class.
 %==============================================================================
 
-% ---- Encoding & language ----------------------------------------------------
+% ---- Encoding (so UTF-8 in references.bib renders correctly) ----------------
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
 
-% ---- Math (load amsmath/amssymb BEFORE newtxmath to avoid \Bbbk clash) ------
+% ---- Math -------------------------------------------------------------------
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{mathtools}
 
-% ---- Fonts (Times-like, good for theses) ------------------------------------
-\usepackage{newtxtext}      % Times-like text font
-\usepackage{newtxmath}      % matching math font (after amssymb)
-
-\usepackage{siunitx}        % SI units, e.g. \SI{3.3}{\volt}, \num{1.5e3}
-
-% ---- Page geometry & spacing ------------------------------------------------
-\usepackage{geometry}
-\usepackage{setspace}
-
 % ---- Figures & tables -------------------------------------------------------
 \usepackage{graphicx}
 \graphicspath{{figures/}}
-\usepackage{booktabs}       % professional tables (\toprule, \midrule, ...)
-\usepackage{caption}
-\usepackage{subcaption}     % subfigures
-\usepackage{float}          % [H] float placement
+\usepackage{float}          % [H] placement
+\usepackage{booktabs}       % \toprule, \midrule, \bottomrule
+\usepackage{multirow}
+\usepackage{subcaption}
 
-% ---- Lists, color, misc -----------------------------------------------------
+% ---- Units ------------------------------------------------------------------
+\usepackage{siunitx}
+\sisetup{per-mode=symbol, detect-all}
+
+% ---- Acronyms (List of Acronyms and Abbreviations) --------------------------
+% No "printonlyused": the list prints every entry defined in frontmatter/acronyms.
+\usepackage{acronym}
+
+% ---- Captions (OzU template style) ------------------------------------------
+\usepackage[justification=justified,singlelinecheck=false]{caption}
+\captionsetup{skip=6pt}
+
+% ---- Misc -------------------------------------------------------------------
 \usepackage{xcolor}
-\usepackage{enumitem}
-\usepackage{titlesec}       % chapter/section heading styling (see style.tex)
-\usepackage{fancyhdr}       % page headers/footers (see style.tex)
+\usepackage{csquotes}
+\usepackage{url}
+\usepackage{indentfirst}
 
-% ---- Cross-references & links (hyperref must precede biblatex) ---------------
+% ---- Links & smart cross-references -----------------------------------------
+% hyperref must precede cleveref; the class is given the 'hyperref' option.
 \usepackage{hyperref}
-\usepackage{csquotes}       % required by biblatex
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=blue,
+}
+\usepackage[capitalize,noabbrev]{cleveref}
 
-% ---- Bibliography: IEEE numbered style --------------------------------------
-\usepackage[backend=biber, style=ieee, sorting=none]{biblatex}
-\addbibresource{references.bib}
-
-% ---- Smart cross-references (load AFTER hyperref) ---------------------------
-\usepackage[capitalize, noabbrev]{cleveref}
+% Paragraph indent per OzU template (1 tab = 1.27 cm).
+\setlength{\parindent}{1.27cm}
