@@ -52,12 +52,15 @@ Nothing downstream finalizes until these are measured.
 - [ ] QCL power/tuning curve — *Claude from `experimental/*.xlsx`*
 - [ ] Results plots: ADM resonance, lock-in linearity, N₂O calibration, H₂O/HITRAN, Allan
 
-## 5. Citations still needed (4)
+## 5. Citations still needed (~16 flags)
 
-- [ ] Intro: N₂O GWP value + dominant-ozone-depleter claim (IPCC AR6, Ravishankara 2009)
-- [ ] §2.3: quantum cascade laser operating principle (Faist et al. 1994, or a QCL review)
-- [ ] §2.3: intrapulse heating / spectral broadening in pulsed QCLs
-- [ ] §2.5: HITRAN (Gordon et al. 2022) — also clears the lone `[?]` in Results
+Run `grep -rn '\needcite' chapters frontmatter` for the full list with descriptions. By area:
+- **Intro:** GWP/ozone (IPCC, Ravishankara 2009); atmospheric abundance + growth; anthropogenic source breakdown; medical/breath use; laser-absorption-spectroscopy review
+- **§2.1:** conventional (non-optical) gas-sensor review; V–T relaxation effect on the PA signal
+- **§2.2:** piezoelectric QTF operation; QTF electrical equivalent-circuit model
+- **§2.3:** QCL operating principle (Faist et al. 1994 / review); lock-in / phase-sensitive detection; pulsed-QCL intrapulse broadening
+- **§2.4:** thermal (Johnson) noise limit of the QTF; Allan-variance method (Werle et al. 1993)
+- **§2.5:** HITRAN (Gordon et al. 2022, also clears the Results `[?]`); pressure broadening / Lorentzian line shape
 
 ## 6. You to fill (not experiment)
 
