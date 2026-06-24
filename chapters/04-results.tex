@@ -28,7 +28,7 @@ clear maximum of \SI{930}{\milli\volt} (\SI{1.85}{\volt} peak-to-peak) was found
   \label{eq:f0}
   f_0 = \SI{12458.8}{\hertz}.
 \end{equation}
-This value is used as the QCL repetition (modulation) frequency throughout.
+This value is used as the QCL repetition (modulation) frequency throughout. \todo{Record a full frequency sweep around $f_0$ in fine (sub-Hz) steps to plot the ADM resonance curve and extract the quality factor $Q = f_0/\Delta f$; only a few points were taken so far, so no resonance figure is shown yet.}
 
 \section{Lock-In Amplifier Characterization}
 \label{sec:lockin-char}
@@ -73,11 +73,8 @@ cannot be probed effectively.
 
 \begin{figure}[H]
   \centering
-  % \includegraphics[width=0.8\textwidth]{qcl-tuning-curve.pdf}
-  \fbox{\parbox[c][4cm][c]{0.7\textwidth}{\centering\itshape
-        QCL average output power vs.\ wavelength over \SIrange{5}{9}{\micro\meter}.
-        Replace with your measured tuning curve.}}
-  \caption{Measured QCL average output power across the tuning range.}
+  \includegraphics[width=0.85\textwidth]{qcl-tuning-curve.pdf}
+  \caption{Measured average output power of the MIRcat-2300 QCL across its tuning range, for the \SI{100}{\kilo\hertz} repetition rate and \SI{200}{\nano\second} pulse-width setting. The power peaks at about \SI{125}{\milli\watt} near \SIrange{7.5}{7.6}{\micro\meter} and falls toward the edges of the tuning range.}
   \label{fig:qcl-tuning}
 \end{figure}
 

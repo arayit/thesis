@@ -36,6 +36,13 @@ Nothing downstream finalizes until these are measured.
 - [ ] No-gas / non-absorbing-line background (noise floor)
 - [ ] One long fixed-condition recording for the Allan deviation (≥ 1000 s)
 - [ ] Controlled signal-vs-pressure measurement (§4.7)
+- [ ] ADM resonance frequency sweep around f₀ (fine sub-Hz steps) → resonance curve + Q = f₀/Δf
+
+Lock-in / detection-chain characterization (bench, no gas needed):
+- [ ] Noise vs time constant → equivalent noise bandwidth Δf for the NNEA (confirm noise ∝ 1/√τ) — most important
+- [ ] Compare 6 vs 12 dB/oct filter slope; settle on one and record its Δf
+- [ ] Frequency selectivity around f₀ (R vs small input-frequency offset)
+- [ ] Linearity across the sensitivity ranges actually used; document the +40% artifact ranges
 
 ## 3. After data — analysis & writing (Claude can do)
 
@@ -46,18 +53,22 @@ Nothing downstream finalizes until these are measured.
 
 ## 4. Figures (replace the placeholder boxes)
 
+- [x] Lock-in / phase-sensitive detection block diagram (§2.3) — done (`figures/lockin-blockdiagram.pdf`)
 - [ ] 2D system block diagram with the lock-in chain — *you*
 - [ ] 3D Blender setup render — *you*
 - [ ] Focusing guide + Gaussian-beam figure — *Claude can draft*
-- [ ] QCL power/tuning curve — *Claude from `experimental/*.xlsx`*
+- [x] QCL power/tuning curve (§4.3) — done (`figures/qcl-tuning-curve.pdf`)
 - [ ] Results plots: ADM resonance, lock-in linearity, N₂O calibration, H₂O/HITRAN, Allan
 
-## 5. Citations still needed (4)
+## 5. Citations still needed (~19 flags)
 
-- [ ] Intro: N₂O GWP value + dominant-ozone-depleter claim (IPCC AR6, Ravishankara 2009)
-- [ ] §2.3: quantum cascade laser operating principle (Faist et al. 1994, or a QCL review)
-- [ ] §2.3: intrapulse heating / spectral broadening in pulsed QCLs
-- [ ] §2.5: HITRAN (Gordon et al. 2022) — also clears the lone `[?]` in Results
+Run `grep -rn '\needcite' chapters frontmatter` for the full list with descriptions. By area:
+- **Intro:** GWP/ozone (IPCC, Ravishankara 2009); atmospheric abundance + growth; anthropogenic source breakdown; medical/breath use; laser-absorption-spectroscopy review
+- **§2.1:** conventional (non-optical) gas-sensor review; V–T relaxation effect on the PA signal
+- **§2.2:** piezoelectric QTF operation; QTF electrical equivalent-circuit model
+- **§2.3:** QCL operating principle (Faist et al. 1994); mid-IR fingerprint region; comparison of mid-IR laser sources; external-cavity QCL tuning; lock-in / phase-sensitive detection; pulsed-QCL intrapulse broadening
+- **§2.4:** thermal (Johnson) noise limit of the QTF; Allan-variance method (Werle et al. 1993)
+- **§2.5:** HITRAN (Gordon et al. 2022, also clears the Results `[?]`); pressure broadening / Lorentzian line shape
 
 ## 6. You to fill (not experiment)
 
