@@ -1,7 +1,7 @@
 # Thesis Completion Plan
 
 Working roadmap for the pulsed-QCL QEPAS / N₂O thesis. Living document; tick the
-boxes as things get done. Last updated: 2026-06-24.
+boxes as things get done. Last updated: 2026-07-07.
 
 ---
 
@@ -36,13 +36,49 @@ Nothing downstream finalizes until these are measured.
 - [ ] No-gas / non-absorbing-line background (noise floor)
 - [ ] One long fixed-condition recording for the Allan deviation (≥ 1000 s)
 - [ ] Controlled signal-vs-pressure measurement (§4.7)
-- [ ] ADM resonance frequency sweep around f₀ (fine sub-Hz steps) → resonance curve + Q = f₀/Δf
+- [x] ADM resonance frequency sweep around f₀ → Lorentzian fit: f₀ = 12458.83 Hz, Q = 9007 ± 91 (100 mV drive; 50 mV cross-check confirms linear drive regime)
 
 Lock-in / detection-chain characterization (bench, no gas needed):
 - [ ] Noise vs time constant → equivalent noise bandwidth Δf for the NNEA (confirm noise ∝ 1/√τ) — most important
 - [ ] Compare 6 vs 12 dB/oct filter slope; settle on one and record its Δf
 - [ ] Frequency selectivity around f₀ (R vs small input-frequency offset)
 - [ ] Linearity across the sensitivity ranges actually used; document the +40% artifact ranges
+
+---
+
+## 2b. Phased experimental roadmap (agreed 2026-07-07)
+
+**Period A — before the visible guide laser arrives (~2-3 weeks)**
+- [ ] A1 Signal validation (first lab day): park & switch @ 1296.7 (N₂O→N₂→N₂O);
+      repeat narrow scan 1296.3–1297.3; record lock-in display quantity (R or X?)
+      → prime suspect for the 45-vs-12 mV background discrepancy; also check
+      which sensitivity range each past dataset used (documented +40% artifact
+      ranges: 500 µV / 5 mV / 50 mV). Start the daily-reference protocol.
+- [ ] A2 DAQ integration (1 day): CH1 analog-out scaling calibration → 1 Hz logger
+      → 10 min fixed recording (validates logger + gives noise character).
+- [ ] A3 Baseline calibration & performance (1-2 days): concentration series @ line
+      centre → slope k (mV/ppm); noise 1σ from recording; LOD = 3σ/k; NNEA
+      (Δf from lock-in TC).
+- [ ] A4 Desk work (parallel): HITRAN line identification for the 1296.7 peak +
+      H₂O interference assessment; add decenter scan + measured beam size to
+      beam_propagation.py; write 2f-WMS vs 1f-AM justification subsection (§2);
+      merge methodology-updates.tex.
+
+**Period B — after the visible guide laser arrives**
+- [ ] B1 Alignment optimization: visual coarse alignment (639 nm pilot + ZnSe wedge),
+      then fine alignment maximizing the live gas signal (target ±100–150 µm
+      centering per simulation tolerance). Document before/after: k, background,
+      transmission.
+- [ ] B2 Operating-point optimization: pressure scan 200–760 Torr (re-measure QTF f₀
+      at each pressure, update PRF); re-characterize f₀/Q at the final pressure.
+- [ ] B3 Final performance: repeat concentration series at optimum → final k, LOD,
+      NNEA; Allan-Werle deviation from ≥1000 s recording → LOD @ 10 s.
+
+**Period C — reporting**
+- [ ] C1 Comparison table (N₂O QEPAS literature vs this work)
+- [ ] C2 Results + Discussion writing; honest limitations (pulsed linewidth,
+      background origin; pinhole as future work)
+- [ ] C3 Final figure pass (unify fit/plot scripts to thesis style)
 
 ## 3. After data — analysis & writing (Claude can do)
 
