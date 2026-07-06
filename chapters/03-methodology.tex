@@ -44,11 +44,13 @@ The main parameters are listed in \cref{tab:params}.
     \midrule
     QCL  & Source                & Daylight Solutions MIRcat-2300 \\
          & Tuning range          & \SIrange{1111}{2000}{\per\centi\meter} (\SIrange{5}{9}{\micro\meter}) \\
-         & \nto\ line (primary)  & \SI{1297.8}{\per\centi\meter} (\(\approx\)\,\SI{7.7}{\micro\meter}) \\
+         & \nto\ line (nominal set point) & \SI{1296.7}{\per\centi\meter} (\(\approx\)\,\SI{7.7}{\micro\meter}; located, \cref{sec:line-location}) \\
          & Pulse width           & \SIrange{500}{1000}{\nano\second} \\
          & Repetition / mod.\ freq. & $f_0 = \SI{12458.8}{\hertz}$ (external trigger) \\
     ADM  & Module                & Thorlabs ADM01 \\
-         & QTF resonance $f_0$    & \SI{12458.8}{\hertz} \\
+         & QTF resonance $f_0$    & \SI{12458.8}{\hertz} (\cref{sec:adm-char}) \\
+         % f0 and Q re-measured at the final operating pressure: pending (Period B2).
+         & QTF quality factor $Q$ & $9007 \pm 91$ (ambient; \cref{sec:adm-char}) \\
          & Windows               & BaF\textsubscript{2}, wedged, \(\approx\)\,\SI{2.5}{\milli\meter} \\
     Optics & Focusing mirror     & gold OAP, MPD149-M01, RFL \SI{101.6}{\milli\meter} \\
          & Focused beam waist    & \(\approx\)\,\SI{100}{\micro\meter} \\
@@ -65,14 +67,44 @@ The main parameters are listed in \cref{tab:params}.
 
 The excitation source is a Daylight Solutions MIRcat-2300 tunable QCL, capable
 of emitting between \SI{1111}{\per\centi\meter} and \SI{2000}{\per\centi\meter}
-(\SIrange{5}{9}{\micro\meter}). It is operated in pulsed mode and tuned onto the
-\nto\ $\nu_1$ line at \SI{1297.8}{\per\centi\meter}. The laser is driven in
+(\SIrange{5}{9}{\micro\meter}). It is operated in pulsed mode and tuned onto an
+\nto\ $\nu_1$ R-branch line located experimentally as described in
+\cref{sec:line-location}. The laser is driven in
 \emph{external-trigger} mode: a waveform generator (Rigol DG922\,Pro) supplies a
 \SI{5}{\volt} (peak-to-peak) TTL pulse train at the QTF resonance frequency
 $f_0 = \SI{12458.8}{\hertz}$ to the QCL \texttt{TRIG IN} input (high impedance,
 pulse mode), so that one laser pulse is emitted per QTF oscillation period. This
 constitutes the amplitude modulation of the optical power at $f_0$. Average
 optical power is monitored with an Ophir Nova~II power meter.
+
+\section{Spectral Line Location and Wavelength Calibration}
+\label{sec:line-location}
+
+The MIRcat wavelength readout has a specified absolute accuracy of
+$\pm$\SI{0.5}{\per\centi\meter}, comparable to the spacing of adjacent \nto\
+$\nu_1$ R-branch lines ($\approx$\,\SI{0.8}{\per\centi\meter}) and much larger
+than the pressure-broadened linewidth at the operating pressure
+($\approx$\,\SIrange{0.1}{0.2}{\per\centi\meter}). Setting the laser to the
+nominal line-centre wavenumber therefore does not guarantee spectral overlap
+with the target transition; indeed, initial measurements at a fixed nominal
+wavenumber showed no discernible difference between pure N\textsubscript{2}
+and \SI{100}{\ppm} \nto\ (\cref{sec:n2o-detection}).
+
+The target line is therefore located experimentally by a step scan: with
+\SI{100}{\ppm} \nto\ flowing, the laser is stepped in
+\SI{0.1}{\per\centi\meter} increments (the instrument's set-point resolution)
+over a $\approx$\,\SI{4}{\per\centi\meter} window centred on the nominal
+target, with the pulse width, repetition rate and average power held constant.
+At each step the lock-in output is allowed to settle for at least five time
+constants before it is read. The photoacoustic signal exhibits a clear peak at
+a nominal set point of \SI{1296.7}{\per\centi\meter}, i.e.\ offset by
+\SI{-0.3}{\per\centi\meter} from the nominal target, within the specified
+absolute accuracy. All subsequent measurements use this experimentally located
+set point, and the scan is repeated at the start of each measurement campaign
+to guard against slow drifts of the tuning calibration. Because the pulsed
+laser linewidth ($<$\,\SI{1}{\per\centi\meter}) exceeds the line spacing, the
+observed peak may comprise an unresolved group of adjacent R-branch
+transitions; the assignment is discussed in \cref{sec:n2o-detection}.
 
 \section{Acoustic Detection Module}
 \label{sec:adm}
@@ -107,9 +139,52 @@ Second, at sensitivity settings of \SI{500}{\micro\volt}, \SI{5}{\milli\volt} an
 for time constants \(\ge\)\SI{30}{\milli\second}; these settings are therefore
 avoided (see \cref{sec:lockin-char}).
 
+\section{Signal Validation and Background Characterization Protocol}
+\label{sec:validation-protocol}
+
+Pulsed QEPAS systems exhibit a non-zero background signal even in the absence
+of the analyte, originating from optical absorption of the beam tails by the
+module windows and resonator structure. The following protocol separates and
+validates the signal contributions.
+
+\paragraph{Electronic floor.} With the laser emission blocked, the lock-in
+output is $\approx$\,\SI{0.1}{\milli\volt}, establishing that electrical
+pick-up from the pulse electronics is negligible compared with all optical
+signals.
+
+\paragraph{Photoacoustic nature of the background.} With the laser on and no
+analyte present, the background signal scales linearly with average optical
+power (varied via the pulse width at fixed repetition rate;
+$R^2 = 0.989$ over \SIrange{0.8}{5.4}{\milli\watt}), confirming a genuine
+photoacoustic origin rather than electronic artefacts.
+
+\paragraph{Gas attribution.} The analyte signal is attributed by (i) the
+wavelength selectivity demonstrated in the step scan of
+\cref{sec:line-location}, and (ii) gas-exchange (on/off) measurements at the
+line centre, in which the chamber is alternately supplied with the certified
+\nto\ mixture and pure N\textsubscript{2} at the same pressure and flow.
+
+\paragraph{Background subtraction.} Because the structural background is
+spectrally flat while the analyte absorption is a narrow line, quantitative
+measurements use on-line/off-line subtraction: the net analyte signal is the
+difference between the lock-in reading at the located line centre and at a
+nearby off-line set point.
+
+\paragraph{Daily reference.} Each measurement day begins with a fixed
+reference measurement (located line centre, pure N\textsubscript{2},
+\SI{500}{\nano\second} pulse width, \SI{3}{\second} time constant, fixed
+sensitivity range), providing a day-to-day anchor for the background level and
+overall system response. The lock-in display quantity (magnitude $R$ or
+in-phase $X$) and sensitivity range are recorded with every data set, since
+selected sensitivity ranges exhibit a documented output artefact
+(\cref{sec:lockin-char}).
+
 \section{Beam Delivery and Alignment}
 \label{sec:alignment}
 
+% TODO (pending knife-edge / distance measurement): replace w0 = 2.5 mm with the
+% value measured at the OAP (the beam-propagation simulation used 2.75 mm), and
+% harmonize the focused waist (~89-100 um) and Rayleigh range (~3.3-4.1 mm) below.
 The QCL emits a collimated beam of waist $w_0 = \SI{2.5}{\milli\meter}$. A
 gold-coated plane mirror steers the beam by \ang{90} into a gold-coated off-axis
 parabolic (OAP) mirror (Thorlabs MPD149-M01, reflected focal length
@@ -154,7 +229,11 @@ yields $T_\text{window} \approx \SI{93.4}{\percent}$ per window, and, applying
 \cref{eq:window} to both the entrance and exit windows,
 $T_\text{total} \approx \SI{87.2}{\percent}$ (a \SI{12.8}{\percent} loss). This
 wavelength-specific figure is used during alignment to distinguish genuine window
-loss from clipping inside the module.
+loss from clipping inside the module. The transmission measured after alignment
+is $\approx$\,\SI{85}{\percent} (\cref{sec:power-budget-results}), consistent
+with the predicted \SI{87.2}{\percent} window-only transmission combined with a
+residual \SIrange{2}{3}{\percent} structural loss, bounding beam clipping inside
+the module to the few-percent level.
 
 \section{Gas Handling and Concentration Control}
 \label{sec:gas}
