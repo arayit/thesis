@@ -100,6 +100,48 @@ electronics running throughout.
      varying 0–13 mV nuisance — bracket each concentration plateau with
      the off-line reading, or subtract the N₂ baseline taken close in time.
 
+---
+
+# Calibration legs 1–2 (20 Jul 2026, 18:46–19:03) — accidental park & switch
+
+**Files:** `qepas_20260720_184639_N2_...` (leg 1) and
+`qepas_20260720_185823_N2O_...` (leg 2). Line centre 1296.7 cm⁻¹, 500 ns,
+3.1 mW, **sensitivity now 200 mV** (logger r_v factor 0.2 verified correct;
+200 mV is a 1-range, not in the ×5 artifact list).
+
+![legs 1-2](cal_legs12.png)
+
+## What the traces show
+
+- Leg 1 (labeled N₂): flat baseline 2–5 mV for the first ~3 min ✓, then a
+  smooth S-shaped **rise to ~47 mV** in the last ~2.5 min.
+- Unrecorded gap 18:51–18:58.
+- Leg 2 (labeled N₂O): starts ~40 mV and **decays smoothly to ~0 mV**
+  (τ ≈ 1 min, complete in ~4 min), staying at 0–2 mV thereafter.
+
+## Interpretation: recording windows are offset by one leg vs the gas
+
+The N₂O flow was evidently opened ~2.5 min into leg 1 (the rise is a
+textbook chamber-exchange curve, not the jagged episodic clipping bursts of
+Deney 2); the actual 100-ppm plateau (~47 mV) fell in the unrecorded gap;
+and the switch back to N₂ coincided with the start of the leg-2 recording,
+which therefore captured the purge decay. The labels lag the gas by one
+transition.
+
+**Silver lining — this IS the park-and-switch demonstration:** the signal
+follows the gas cleanly in both directions, 2–5 mV ↔ ~47 mV, with a chamber
+exchange time of ~2.5–3 min (≈1 min time constant). Gas attribution of the
+1296.7 cm⁻¹ signal is hereby confirmed with logged data. Bonus numbers:
+100 ppm on-line signal ≈ 45–47 mV at 3.1 mW / 500 ns (net ≈ 43–45 mV),
+consistent with the R = 45 spot reading earlier today.
+
+**Protocol fix for remaining legs:** switch gas → watch the display until
+the plateau (allow ≥ 4–5 min = 3 time constants) → *then* start the 300 s
+recording → verify live against expectation (N₂O → ~45 mV, N₂ → 0–5 mV);
+if the level disagrees, check the FlowVision MFC settings before recording.
+Keep sensitivity fixed at 200 mV for the entire series. (Leg-1 notes field
+still said "laser close-4" — stale copy from Deney 2; filenames govern.)
+
 ## Notes / deviations from protocol
 
 - Recording taken at 1297.6 cm⁻¹ (off-line), not the located line centre
