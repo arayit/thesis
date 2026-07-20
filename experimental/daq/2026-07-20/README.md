@@ -51,6 +51,55 @@ R–θ mode, 10 Hz logging (1 MHz burst mean per point), 900 s. No DAQ clipping.
   and, if possible, with the pressure-controller loop momentarily static —
   correlates bursts with gas-system activity.
 
+---
+
+# Deney 2 — beam-block discriminator test (20 Jul 2026, 17:53–18:18)
+
+**Files:** `qepas_20260720_175329/180212/180745/181328_...csv` — four 300 s
+segments, A-B-A-B: laser **open-1 → blocked-2 → open-3 → blocked-4**.
+Identical conditions to Deney 1 (N₂, 600 Torr, 1297.6 cm⁻¹ off-line, 500 ns,
+3.21 mW, TC 3 s, sens 20 mV); the beam was physically blocked, laser and all
+electronics running throughout.
+
+## Results
+
+| Segment | median R | σ(1 s) | max | fraction > 1 mV | burst episodes ≥ 5 s |
+|---|---|---|---|---|---|
+| open-1 | 8.21 mV | 1.43 | 11.3 | 100% | 1 (long) |
+| **blocked-2** | **−0.150 mV** | **0.019** | −0.11 | **0%** | **0** |
+| open-3 | 6.39 mV | 4.52 | 13.3 | 89% | 4 |
+| **blocked-4** | **−0.155 mV** | **0.022** | −0.10 | **0%** | **0** |
+
+![beam-block test](exp2_beamblock.png)
+
+## Conclusions
+
+1. **The burst/wander noise is 100% optical in origin.** Ten total minutes
+   of beam-blocked data show a dead-flat trace (σ = 0.02 mV, zero events)
+   while both open segments fluctuate continuously. Acoustic pickup from
+   the gas system, pump vibration, and electrical interference are all
+   ruled out as significant contributors at the current noise level.
+2. **True electronic floor: −0.15 mV offset, σ = 0.02 mV** — 15× better
+   than the previously assumed ~0.1 mV. The small negative offset is a
+   CH1/DAQ zero offset; subtract it in analysis.
+3. **The optical background itself drifts on ~10-min timescales:** ~0 mV
+   for most of Deney 1 (17:20–17:35), ~8 mV steady at 17:53, wandering
+   0–13 mV at 18:07. Combined with (1), the picture is episodic
+   **beam-pointing drift causing intermittent prong/structure clipping** —
+   the beam wanders near a prong edge; µm-scale pointing changes convert
+   to mV-scale photoacoustic background.
+4. Practical consequences:
+   - Short-term mitigation candidates: enclose/baffle the free-space beam
+     path against air currents; check mount rigidity; allow thermal
+     settling after any adjustment. A cardboard/foam draft shield is a
+     10-minute experiment: repeat a 5-min open recording with the path
+     covered and compare σ.
+   - Proper fix is Period B (pilot-beam fine alignment centring the beam
+     in the prong gap, away from the clipping edge).
+   - For today's calibration: background must be treated as a slowly
+     varying 0–13 mV nuisance — bracket each concentration plateau with
+     the off-line reading, or subtract the N₂ baseline taken close in time.
+
 ## Notes / deviations from protocol
 
 - Recording taken at 1297.6 cm⁻¹ (off-line), not the located line centre
