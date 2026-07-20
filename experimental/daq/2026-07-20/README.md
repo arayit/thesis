@@ -102,45 +102,58 @@ electronics running throughout.
 
 ---
 
-# Calibration legs 1–2 (20 Jul 2026, 18:46–19:03) — accidental park & switch
+# Calibration legs 1–3 (20 Jul 2026, 18:46–19:10) — background reaches signal level
 
-**Files:** `qepas_20260720_184639_N2_...` (leg 1) and
-`qepas_20260720_185823_N2O_...` (leg 2). Line centre 1296.7 cm⁻¹, 500 ns,
-3.1 mW, **sensitivity now 200 mV** (logger r_v factor 0.2 verified correct;
-200 mV is a 1-range, not in the ×5 artifact list).
+**Files:** `qepas_20260720_184639_N2`, `_185823_N2O`, `_190525_N2`.
+Line centre 1296.7 cm⁻¹, 500 ns, 3.1 mW, **sensitivity now 200 mV**
+(logger r_v factor 0.2 verified correct; 200 mV is not an artifact range).
+Operator procedure: gas switched ~30 s before each recording start.
 
-![legs 1-2](cal_legs12.png)
+![legs 1-3](cal_legs123.png)
 
-## What the traces show
+> An earlier version of this section interpreted legs 1–2 as gas-exchange
+> transients with recording windows offset one leg vs the switches. The
+> operator's actual switch times (~30 s before each recording) rule that
+> out; the interpretation below supersedes it.
 
-- Leg 1 (labeled N₂): flat baseline 2–5 mV for the first ~3 min ✓, then a
-  smooth S-shaped **rise to ~47 mV** in the last ~2.5 min.
-- Unrecorded gap 18:51–18:58.
-- Leg 2 (labeled N₂O): starts ~40 mV and **decays smoothly to ~0 mV**
-  (τ ≈ 1 min, complete in ~4 min), staying at 0–2 mV thereafter.
+## What the traces show (with actual switch times)
 
-## Interpretation: recording windows are offset by one leg vs the gas
+- **Leg 1 (N₂ throughout):** flat 2–5 mV for ~3 min, then a smooth rise to
+  **47 mV — with pure N₂ flowing**. This can only be the optical
+  (clipping) background of Deney 2, now reaching ~45–50 mV — the same
+  magnitude as the 100-ppm gas signal, and 4× larger than the 0–13 mV
+  excursions seen an hour earlier.
+- **Leg 2 (N₂O arriving from ~18:58):** starts ~40 mV and decays to ~0.
+  If the chamber filled with N₂O during this window, a net rise was
+  expected; none is visible above the background wander.
+- **Leg 3 (N₂ from ~19:05):** erratic 4–49 mV wander, median 23 mV —
+  higher than the "N₂O" leg. No purge-decay shape.
 
-The N₂O flow was evidently opened ~2.5 min into leg 1 (the rise is a
-textbook chamber-exchange curve, not the jagged episodic clipping bursts of
-Deney 2); the actual 100-ppm plateau (~47 mV) fell in the unrecorded gap;
-and the switch back to N₂ coincided with the start of the leg-2 recording,
-which therefore captured the purge decay. The labels lag the gas by one
-transition.
+## Open question: is there any gas response tonight?
 
-**Silver lining — this IS the park-and-switch demonstration:** the signal
-follows the gas cleanly in both directions, 2–5 mV ↔ ~47 mV, with a chamber
-exchange time of ~2.5–3 min (≈1 min time constant). Gas attribution of the
-1296.7 cm⁻¹ signal is hereby confirmed with logged data. Bonus numbers:
-100 ppm on-line signal ≈ 45–47 mV at 3.1 mW / 500 ns (net ≈ 43–45 mV),
-consistent with the R = 45 spot reading earlier today.
+The three legs are consistent with the optical background excursions
+(grown to ~50 mV) dominating everything; whether the gas signal is present
+underneath cannot be determined from these traces. Two candidate causes for
+an absent gas response: (a) the MIRcat retune 1297.6 → 1296.7 at ~18:45
+missed the line (set-point repeatability), or (b) the analyte was not
+actually flowing (MFC/valve state). **Decisive 5-minute test:** with N₂O
+flowing and FlowVision *actual* flow confirmed at 10 sccm, toggle the set
+point 1296.7 ↔ 1298.5 (A-B-A-B, ~1 min per state after settling). The
+background is spectrally flat, so a persistent on/off-line difference of
+tens of mV = gas response present; no systematic difference = re-locate the
+line with a mini scan (1296.3–1297.1) before any further calibration.
 
-**Protocol fix for remaining legs:** switch gas → watch the display until
-the plateau (allow ≥ 4–5 min = 3 time constants) → *then* start the 300 s
-recording → verify live against expectation (N₂O → ~45 mV, N₂ → 0–5 mV);
-if the level disagrees, check the FlowVision MFC settings before recording.
-Keep sensitivity fixed at 200 mV for the entire series. (Leg-1 notes field
-still said "laser close-4" — stale copy from Deney 2; filenames govern.)
+## Consequences
+
+- The evening's legs 1–3 are **not usable as calibration points**; archived
+  as instability documentation.
+- The background excursion amplitude grew 13 → 50 mV between ~18:10 and
+  ~18:50 (thermal drift of pointing is the prime suspect). Calibration
+  under these conditions needs either the background stabilized (beam-path
+  shielding / Period-B alignment) or a differential on/off-line protocol
+  per point.
+- The overnight fixed-condition N₂ recording (Deney 4 / Allan) remains
+  fully valuable — it characterizes exactly this instability vs time.
 
 ## Notes / deviations from protocol
 
