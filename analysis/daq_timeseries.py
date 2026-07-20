@@ -27,14 +27,35 @@ import matplotlib.pyplot as plt
 
 
 def load_csv(path):
-    """Return (t_seconds, ch1_V, ch2_V-or-None); tolerant of headers/timestamps."""
+    """Return (t_seconds, y, ch2_or_None, y_is_mv).
+
+    Two formats are understood:
+    - Lab logger files: '# key,value' comment block, then named columns
+      including elapsed_s and r_v (R in input-referred volts). Returns
+      y = R in mV directly (y_is_mv = True); --sens is ignored.
+    - Plain CSV [time, ch1_V(, ch2_V)]: returns y = CH1 volts
+      (y_is_mv = False); main() converts via --sens.
+    """
+    header_cols = None
     rows = []
     with open(path, errors="replace") as f:
         for line in f:
+            if line.startswith("#"):
+                continue
             parts = [p.strip() for p in line.replace(";", ",").split(",") if p.strip()]
-            if len(parts) < 2:
+            if not parts:
+                continue
+            if header_cols is None and "r_v" in [p.lower() for p in parts]:
+                header_cols = [p.lower() for p in parts]
                 continue
             rows.append(parts)
+    if header_cols:
+        it = header_cols.index("elapsed_s")
+        ir = header_cols.index("r_v")
+        t = np.array([float(r[it]) for r in rows])
+        y = np.array([float(r[ir]) for r in rows]) * 1000.0    # -> mV
+        return t - t[0], y, None, True
+    rows = [r for r in rows if len(r) >= 2]
     # drop header rows (non-numeric second column)
     def _num(s):
         try:
@@ -63,7 +84,7 @@ def load_csv(path):
         t = np.array([parse(x) for x in t_raw])
         t -= t[0]
         t[t < 0] += 86400                    # midnight rollover
-    return t, ch1, ch2
+    return t, ch1, ch2, False
 
 
 def allan_deviation(y, dt, taus=None):
@@ -92,8 +113,8 @@ def main():
     ap.add_argument("--t0", help="wall-clock HH:MM:SS of the first sample (to align events)")
     args = ap.parse_args()
 
-    t, ch1, ch2 = load_csv(args.csv)
-    r_mv = ch1 * args.sens
+    t, ch1, ch2, is_mv = load_csv(args.csv)
+    r_mv = ch1 if is_mv else ch1 * args.sens
     dt = np.median(np.diff(t))
     print(f"{len(t)} samples, dt = {dt:.2f} s, duration = {t[-1]:.0f} s")
     print(f"R: mean {r_mv.mean():.2f} mV  std {r_mv.std():.2f} mV  "
@@ -173,7 +194,8 @@ def main():
         fig.tight_layout()
         fig.savefig(f"{out}_allan.png", dpi=150)
         i = np.argmin(adev)
-        print(f"Allan minimum: {adev[i]:.3f} mV at τ = {tau[i]:.0f} s")
+        print(f"Allan minimum: {adev[i]:.3f} mV at τ = {tau[i]:.1f} s")
+        print("(note: samples within one lock-in TC are correlated; ADEV below ~TC is optimistic)")
 
     print(f"\nplots: {out}_timeseries.png, {out}_periodogram.png, {out}_allan.png")
 
