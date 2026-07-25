@@ -65,6 +65,32 @@ to gas switching, and zero signal with the beam blocked. Tests
 3. Repeat the narrow scan twice back-to-back: peak position shifting
    between runs ⇒ tuner/frequency instability quantified.
 
-(Caveat: this dataset contains no H₂O lines; H₂O interference near the
-operating region is documented separately in Results §h2o and is not
-excluded by these tests.)
+## H₂O ruled out for the 20-July evening background (hard result)
+
+`h2o_n2o_1295-1298_hitran.csv` (fetched 20 Jul, H₂O + N₂O, 1295–1298):
+the strongest H₂O line in the window is **3.6 × 10⁻²² at 1296.709**
+(a hot line, E″ = 1475 cm⁻¹) — ~4,700× weaker than the N₂O R-branch
+lines. Producing a 45 mV signal via H₂O here would require ~47% water
+vapour; the saturation limit at 600 Torr / 23 °C is ~3.5%. **Physically
+impossible → the steady 45–50 mV background at nominal 1297.6 cm⁻¹ is
+not H₂O** (within 1295–1298; December's 1287.5/1288.5 peaks remain
+genuine H₂O, outside this window).
+
+Within 1295–1298 the only transitions strong enough to give tens of mV
+at sub-% concentrations are the N₂O main-isotopologue R13/R14/R15 lines
+(hot bands are 30× weaker). The economical hypothesis consistent with
+all of tonight's facts: **N₂O still present in the ADM despite the
+closed cylinder and 30-min "purge" (purge flow not exchanging the module
+volume — plumbing/dead-volume question), combined with a shifted
+instrument wavenumber offset after the evening retunes** (so nominal
+1297.6 now sits on R15 at 1297.831 while nominal 1296.7 sits in the
+R13–R14 gap). Offset shifts of ±0.1–0.2 between tuning sessions are
+within EC-QCL set-point reproducibility.
+
+**Decisive test (next session, ~18 min): narrow scan in pure N₂,
+1295.3 → 1298.8, 0.1 steps, ~30 s/point.** If trapped N₂O: three
+equal-height peaks at the R13/R14/R15 positions, and the peak positions
+measure the current offset directly (free recalibration). A single peak
+with silent neighbours would exclude N₂O (equal-S picket) and reopen the
+search. Also to be recorded: whether the ADM is plumbed flow-through or
+dead-end, and the actual (not set) purge flow.
