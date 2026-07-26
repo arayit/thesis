@@ -92,5 +92,19 @@ within EC-QCL set-point reproducibility.
 equal-height peaks at the R13/R14/R15 positions, and the peak positions
 measure the current offset directly (free recalibration). A single peak
 with silent neighbours would exclude N₂O (equal-S picket) and reopen the
-search. Also to be recorded: whether the ADM is plumbed flow-through or
-dead-end, and the actual (not set) purge flow.
+search.
+
+**RESOLVED (operator confirmation, 20 Jul evening): the ADM output valve
+was never opened.** The module has been a dead-end volume all along —
+supply-side gas switches changed the line composition but the ADM
+interior only exchanged by slow diffusion, so the day's N₂O charge stayed
+trapped through every "purge". This single fact explains: the steady
+45–50 mV "N₂ background" (trapped N₂O read on R15), its immunity to the
+closed cylinder and 30-min purge, the weak/confusing response to gas
+switching in calibration legs 1–3, and (in part) historical anomalies —
+the near-identical 6-July N₂ vs N₂O power sweeps and the December
+"closed chamber" operating mode described in the methodology. Fix:
+open the output valve → true flow-through. Confirmation scan above still
+worth doing *before* opening the valve (trapped gas = free offset
+calibration sample), then watch the decay at the R15 set point after
+opening (purge time constant, second confirmation).
