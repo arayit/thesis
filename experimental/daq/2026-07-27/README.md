@@ -44,6 +44,20 @@ Sub-ppm 3σ LOD for a pulsed-EC-QCL 1f-AM N₂O QEPAS would be a strong
 headline number. **These become quotable only after the calibration
 series pins k** — the one dataset still missing.
 
+## ⚠ Pressure caveat (added after operator correction, 27 Jul)
+
+The `adm_pressure = 600 torr` metadata for the flow-through-period
+recordings is **not verified**. With the ADM outlet open directly toward
+the pump, the PCD (a dual-valve controller designed to regulate a
+dead-ended process volume) cannot hold the chamber at 600 Torr — the
+supply is MFC-limited while the pump drains through the open outlet, so
+the chamber settles at a conductance-determined lower pressure. The
+noise/Allan statistics of this recording stand, but its absolute
+pressure (and hence signal-magnitude comparisons against 600 Torr data)
+carries an unknown offset. Operating mode returns to the **closed
+chamber** (outlet valve shut once), which the PCD is designed for:
+gas exchange by evacuate–refill through the supply side.
+
 ## Notes
 
 - The ~6 mV baseline at R14 in N₂ = residual N₂O tail + optical
