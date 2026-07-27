@@ -65,7 +65,28 @@ to gas switching, and zero signal with the beam blocked. Tests
 3. Repeat the narrow scan twice back-to-back: peak position shifting
    between runs ⇒ tuner/frequency instability quantified.
 
-## H₂O ruled out for the 20-July evening background (hard result)
+## ⚠ RETRACTED (27 Jul) — the "H₂O ruled out" verdict below was wrong
+
+The ruling assumed room-temperature saturation (~3.5% at 600 Torr /
+23 °C) versus a computed ~4.7% requirement and called the factor-1.35
+gap "impossible by an order of magnitude." Two effects close the gap:
+the chamber runs warm (saturation 5.3% at 30 °C) and the relevant H₂O
+line at **1296.7093 cm⁻¹** is a hot line (E″ = 1475 cm⁻¹) whose strength
+rises steeply with temperature. A water-saturated warm chamber yields
+40–50 mV on this line. Moreover the 27-Jul three-point readings
+(42 / 27 / 12 mV at nominal 1296.7 / 1297.1 / 1297.6) fit a *single*
+line at ~1296.7 (monotonic decay, offset ≈ 0 today) and are
+incompatible with the equal-strength N₂O comb at any offset. Leading
+hypothesis: **liquid water condensed inside the gas system** (months of
+sub-atmospheric humid-air ingress), re-saturating every sealed fill —
+explaining purge immunity, evacuate–refill recovery, the minutes-scale
+rise after fills, and the low (~6 mV) level under flow-through (flow
+outruns the evaporation). Discriminating scan: H₂O doublet at
+1296.49 + 1296.71 with silent R13/R14/R15 positions, versus the N₂O
+0.78 cm⁻¹ comb. Credit: the water suspicion was the operator's,
+raised a week earlier and wrongly dismissed by this analysis.
+
+## H₂O ruled out for the 20-July evening background (superseded — see retraction above)
 
 `h2o_n2o_1295-1298_hitran.csv` (fetched 20 Jul, H₂O + N₂O, 1295–1298):
 the strongest H₂O line in the window is **3.6 × 10⁻²² at 1296.709**
