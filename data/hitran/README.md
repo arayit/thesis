@@ -108,3 +108,15 @@ open the output valve → true flow-through. Confirmation scan above still
 worth doing *before* opening the valve (trapped gas = free offset
 calibration sample), then watch the decay at the R15 set point after
 opening (purge time constant, second confirmation).
+
+**Correction (21 Jul, morning):** the set-point bookkeeping of the late
+evening was in error — the steady 45–50 mV trapped-gas reading and the
+subsequent purge-decay monitoring were at nominal **1296.7** (= R14 with
+the original −0.35 offset), not 1297.6. The "offset shifted" hypothesis
+above is therefore unnecessary: everything is consistent with the
+July-3 calibration unchanged (nominal 1296.7 = R14 at 1297.0501;
+trapped charge ≈ 100 ppm reading ~45–50 mV exactly as 100 ppm did on
+July 3; post-purge floor ~3 mV ≈ few-ppm residual + the known few-mV
+optical background). Valve opened 21 Jul: flow-through purge dropped
+the on-line background 45–50 → ~3 mV. Gap points for flat-background
+checks with the −0.35 offset: nominal ≈ 1296.3 or ≈ 1297.1.
