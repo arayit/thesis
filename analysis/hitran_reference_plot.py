@@ -89,17 +89,14 @@ ax2.set_ylabel(r"absorption coeff. $\alpha$ (cm$^{-1}$)")
 ax2.set_xlabel(r"wavenumber (cm$^{-1}$)")
 ax2.legend(loc="upper right", frameon=False, fontsize=9)
 
-for name, nu in (("R14 — current", N2O_MARKS["R14"]), ("R15 — proposed", N2O_MARKS["R15"])):
-    ax2.axvline(nu, color=MUTED, lw=0.8, ls=(0, (4, 3)), zorder=0)
-    ax2.annotate(name, (nu + 0.04, 8e-3), fontsize=8, color=INK)
-ax2.annotate("0.34 cm$^{-1}$", (1296.88, 6.5e-8), ha="center", fontsize=7.5, color=MUTED)
-ax2.annotate(
-    "", (1296.7093, 4e-8), xytext=(1297.0501, 4e-8),
-    arrowprops=dict(arrowstyle="<->", lw=0.8, color=MUTED),
-)
+from matplotlib.ticker import MultipleLocator
 
 for ax in (ax1, ax2):
-    ax.grid(True, axis="both", alpha=0.18, lw=0.5)
+    ax.xaxis.set_major_locator(MultipleLocator(0.5))
+    ax.xaxis.set_minor_locator(MultipleLocator(0.1))
+    ax.xaxis.set_major_formatter("{x:.1f}")
+    ax.grid(True, axis="x", which="minor", alpha=0.10, lw=0.4)
+    ax.grid(True, axis="both", which="major", alpha=0.18, lw=0.5)
     for s in ("top", "right"):
         ax.spines[s].set_visible(False)
     ax.tick_params(labelsize=8.5, color=MUTED)
