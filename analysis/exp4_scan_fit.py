@@ -187,6 +187,9 @@ ax1.set_ylabel("QEPAS signal $R$ (mV)")
 ax1.set_xlabel(r"nominal set point (cm$^{-1}$)")
 ax1.set_ylim(0, 66)
 ax1.legend(loc="upper right", frameon=False, fontsize=8.5)
+ax1.annotate(
+    f"error bars ($\\pm${r_std.mean():.2f} mV plateau std)\nare smaller than the symbols",
+    (0.985, 0.72), xycoords="axes fraction", ha="right", fontsize=8, color=MUTED)
 ax1.set_title(
     f"Pure-N$_2$ wavelength scan, 28 Jul 2026 — HITRAN water fit  "
     f"($\\delta$ = {d_w:+.2f} cm$^{{-1}}$, laser FWHM = {w_w:.2f} cm$^{{-1}}$, "
