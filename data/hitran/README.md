@@ -86,6 +86,16 @@ outruns the evaporation). Discriminating scan: H₂O doublet at
 0.78 cm⁻¹ comb. Credit: the water suspicion was the operator's,
 raised a week earlier and wrongly dismissed by this analysis.
 
+## ✅ CONFIRMED (28 Jul) — the background is water, proven by full scan
+
+The 51-point pure-N₂ scan 1295–1300 cm⁻¹ (`experimental/daq/2026-07-28/`,
+fit in `analysis/exp4_scan_fit.py`, figure `figures/exp4-scan-fit.png`)
+matches the HITRAN water spectrum with **R² = 0.992** (N₂O-only model:
+R² = 0.04) — all three H₂O features at correct positions and relative
+intensities, N₂O R12–R17 pickets silent. Fitted: δ = −0.23 cm⁻¹
+(per-session offset), laser FWHM = 0.26 cm⁻¹, water ≈ saturation.
+The hypothesis below stands confirmed.
+
 ## Reference figure and the complete H₂O picture (27 Jul)
 
 `h2o_n2o_1295-1300_hitran.par` (H₂O + N₂O, 1295–1300) →
