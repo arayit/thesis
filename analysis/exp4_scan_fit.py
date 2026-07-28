@@ -146,62 +146,53 @@ print(f"     -> H2O ~ {frac_sat:.2f} x saturation(25 C) = "
       f"{frac_sat * 23.76:.1f} Torr partial pressure")
 print(f"     -> residual N2O equivalent ~ {n2o_ppm:.1f} ppm")
 
-# water-only and N2O-only alternates for the record
-for label, cols in (("water-only", [0, 1, 2]), ("N2O-only", [0, 1, 3])):
-    Afull = np.column_stack([np.ones_like(nu), nu - nu.mean(),
-                             np.interp(nu + d, grid, convolved(a_w, w)),
-                             np.interp(nu + d, grid, convolved(a_n, w))])
-    A2 = Afull[:, cols]
-    c2, *_ = np.linalg.lstsq(A2, r, rcond=None)
-    sse2 = ((r - A2 @ c2) ** 2).sum()
-    print(f"     {label:10s}: R^2 = {1 - sse2 / ((r - r.mean()) ** 2).sum():.4f}")
+# water-only fit (same grid search, no N2O column) -- this is what gets plotted
+best_w = None
+for w2 in np.arange(0.06, 0.62, 0.02):
+    cw = convolved(a_w, w2)
+    for d2 in np.arange(-0.50, 0.31, 0.005):
+        mw = np.interp(nu + d2, grid, cw)
+        A = np.column_stack([np.ones_like(nu), nu - nu.mean(), mw])
+        coef, *_ = np.linalg.lstsq(A, r, rcond=None)
+        sse2 = ((r - A @ coef) ** 2).sum()
+        if best_w is None or sse2 < best_w[0]:
+            best_w = (sse2, d2, w2, coef)
+sse_w, d_w, w_w, (c0w, c1w, Bw_w) = best_w
+r2_w = 1 - sse_w / ((r - r.mean()) ** 2).sum()
+print(f"     water-only: R^2 = {r2_w:.4f} (delta {d_w:+.3f}, FWHM {w_w:.2f})")
 
-# ---- figure -----------------------------------------------------------------
-fig, (ax1, ax2) = plt.subplots(
-    2, 1, figsize=(9.5, 6.4), sharex=True, gridspec_kw={"height_ratios": [2.6, 1]}
-)
+# N2O-only alternate for the record
+A2 = np.column_stack([np.ones_like(nu), nu - nu.mean(),
+                      np.interp(nu + d, grid, convolved(a_n, w))])
+c2, *_ = np.linalg.lstsq(A2, r, rcond=None)
+sse2 = ((r - A2 @ c2) ** 2).sum()
+print(f"     N2O-only  : R^2 = {1 - sse2 / ((r - r.mean()) ** 2).sum():.4f}")
+
+# ---- figure: measured points + HITRAN water fit -----------------------------
+fig, ax1 = plt.subplots(figsize=(9.5, 4.8))
 fig.patch.set_facecolor("white")
 
 nu_f = np.arange(1295.0, 1300.001, 0.01)
-mw_f = B_w * np.interp(nu_f + d, grid, convolved(a_w, w))
-mn_f = B_n * np.interp(nu_f + d, grid, convolved(a_n, w))
-base_f = c0 + c1 * (nu_f - nu.mean())
+fit_f = c0w + c1w * (nu_f - nu.mean()) + Bw_w * np.interp(
+    nu_f + d_w, grid, convolved(a_w, w_w))
 
-ax1.plot(nu_f, base_f + mw_f + mn_f, color=ORANGE, lw=1.8,
-         label="fit: H$_2$O + N$_2$O + baseline", zorder=3)
-ax1.plot(nu_f, base_f + mn_f, color=BLUE, lw=1.4, ls="--",
-         label=f"N$_2$O component ({n2o_ppm:.1f} ppm equiv.)", zorder=2)
-ax1.plot(nu_f, base_f, color=MUTED, lw=1.0, ls=":", label="baseline", zorder=1)
-ax1.plot(nu, r, "o", ms=4.5, color=INK, mfc="white", mew=1.2,
-         label="measured (pure N$_2$, sealed, 600 Torr)", zorder=4)
-
-for x in H2O_MAIN:
-    ax1.axvline(x - d, color=ORANGE, lw=0.7, alpha=0.35, ymax=0.93)
-ax1.annotate("H$_2$O lines\n(at nominal $\\nu - \\delta$)",
-             (H2O_MAIN[2] - d, 20), xytext=(1297.85, 33),
-             fontsize=8, color=ORANGE, ha="left",
-             arrowprops=dict(arrowstyle="-", color=ORANGE, lw=0.7, alpha=0.5))
-for x in N2O_PICKETS:
-    ax1.plot([x - d], [2.0], marker=7, color=BLUE, ms=6, clip_on=False)
-ax1.annotate("N$_2$O R-branch positions", (1295.60, 3.6), fontsize=8, color=BLUE)
+ax1.plot(nu_f, fit_f, color=ORANGE, lw=1.8,
+         label="HITRAN H$_2$O fit (600 Torr, Lorentzian $\\times$ laser lineshape)",
+         zorder=2)
+ax1.errorbar(nu, r, yerr=r_std, fmt="o", ms=4.5, color=INK, mfc="white",
+             mew=1.2, elinewidth=1.0, capsize=2.0,
+             label="measured (pure N$_2$, sealed, 600 Torr)", zorder=3)
 
 ax1.set_ylabel("QEPAS signal $R$ (mV)")
+ax1.set_xlabel(r"nominal set point (cm$^{-1}$)")
 ax1.set_ylim(0, 66)
 ax1.legend(loc="upper right", frameon=False, fontsize=8.5)
 ax1.set_title(
-    f"Pure-N$_2$ scan 28 Jul 2026 vs HITRAN:  water fit  "
-    f"($\\delta$ = {d:+.2f} cm$^{{-1}}$, laser FWHM = {w:.2f} cm$^{{-1}}$, "
-    f"R$^2$ = {r2:.3f})", fontsize=10.5, color=INK)
+    f"Pure-N$_2$ wavelength scan, 28 Jul 2026 — HITRAN water fit  "
+    f"($\\delta$ = {d_w:+.2f} cm$^{{-1}}$, laser FWHM = {w_w:.2f} cm$^{{-1}}$, "
+    f"R$^2$ = {r2_w:.3f})", fontsize=10.5, color=INK)
 
-ax2.axhline(0, color=MUTED, lw=0.8)
-ax2.plot(nu, res, "o-", ms=3.5, lw=0.8, color=INK, mfc="white", mew=1.0)
-ax2.set_ylabel("residual (mV)")
-ax2.set_xlabel(r"nominal set point (cm$^{-1}$)")
-ax2.set_ylim(-4, 4)
-ax2.annotate(f"rms = {rms:.2f} mV", (0.985, 0.90), xycoords="axes fraction",
-             ha="right", fontsize=8.5, color=MUTED)
-
-for ax in (ax1, ax2):
+for ax in (ax1,):
     ax.set_xlim(1294.9, 1300.1)
     ax.xaxis.set_major_locator(MultipleLocator(0.5))
     ax.xaxis.set_minor_locator(MultipleLocator(0.1))
@@ -212,7 +203,7 @@ for ax in (ax1, ax2):
         ax.spines[s].set_visible(False)
     ax.tick_params(labelsize=8.5, color=MUTED)
 
-fig.tight_layout(h_pad=1.0)
+fig.tight_layout()
 out = ROOT / "figures" / "exp4-scan-fit"
 fig.savefig(f"{out}.png", dpi=200)
 fig.savefig(f"{out}.pdf")
