@@ -86,6 +86,23 @@ outruns the evaporation). Discriminating scan: H₂O doublet at
 0.78 cm⁻¹ comb. Credit: the water suspicion was the operator's,
 raised a week earlier and wrongly dismissed by this analysis.
 
+## Reference figure and the complete H₂O picture (27 Jul)
+
+`h2o_n2o_1295-1300_hitran.par` (H₂O + N₂O, 1295–1300) →
+`analysis/hitran_reference_plot.py` → `figures/hitran-n2o-h2o-reference.(png|pdf)`:
+stick spectrum + simulated α at lab conditions (600 Torr, 25 °C, 100 ppm
+N₂O vs saturated 4.0% H₂O).
+
+Significant H₂O lines: **1296.490** (S = 1.72e-22 + 5.7e-23, E″ = 2010),
+**1296.709** (3.63e-22, E″ = 1475), **1297.181/1297.184** (combined
+3.0e-23, E″ = 2358). At saturation these give α comparable to 100 ppm
+N₂O near 1296.5–1296.7 and a secondary feature at 1297.18 — **all three
+27-Jul probe points (nominal 1296.7 / 1297.1 / 1297.6 → 42 / 27 / 12 mV)
+land on water structure**, consistent with the condensed-reservoir
+hypothesis with today's offset ≈ 0. Near **R15 the saturated-water α is
+~350× below the N₂O peak** (and similar at R16): the proposed
+operating-line move is quantitatively justified by this figure.
+
 ## H₂O ruled out for the 20-July evening background (superseded — see retraction above)
 
 `h2o_n2o_1295-1298_hitran.csv` (fetched 20 Jul, H₂O + N₂O, 1295–1298):
