@@ -55,6 +55,38 @@ instrument offset (δ = −0.23) R15 sits at **nominal 1298.06**; re-measure
 δ each session (a mini-scan over 1296.3–1297.3 across the water peak, or
 over the N₂O comb once dry, calibrates it in ~10 min).
 
+## 2b. Full-band verification (31 Jul, 1111–2000 cm⁻¹ par file)
+
+`data/hitran/h2o_n2o_1111-2000_hitran.par` +
+`analysis/full_band_line_ranking.py`: every N₂O line with S > 1e-19
+(the ν₁ P/R comb, P20–R20, 1262–1307 cm⁻¹) ranked against the
+saturated-water background at the fitted 28-Jul conditions (600 Torr,
+24.7 Torr H₂O, laser FWHM 0.26 cm⁻¹, mV via the R14 responsivity
+anchor). Findings:
+
+- **Nothing in the whole 1111–2000 file beats the R-branch plateau
+  R15–R18 (1297.8–1300.2)**: 43.7–45.0 mV per 100 ppm with water
+  backgrounds of 0.03–0.26 mV. Above ~1330 cm⁻¹ the H₂O ν₂ band turns
+  dense and strong (up to 3e-19) — no N₂O alternative lives there.
+- **The P branch is a minefield while the system is wet**: its peak
+  lines interleave with much stronger water than anything near R15 —
+  P6 (1268.39) sits under 57 mV of water, P2 (1271.97) under 89 mV
+  (the 1271.788 line, E″ = 649 rises further in a warm chamber).
+  Only P17–P19 (1274.6–1277.2) are clean, and they are 15–27% weaker
+  than R15.
+- Water-rejection ratios (100 ppm N₂O : sat-H₂O): R15 171:1,
+  R16 479:1, R17 955:1, R18 1554:1. **R16/R17 are the fallbacks** if
+  residual water sensitivity ever matters at sub-ppm levels — they
+  trade ≤1.3% of signal for 3–6× more water margin.
+- **Off-line reference confirmed**: the band-centre zero gap bottoms
+  out at actual 1285.15–1285.25 (nominal ≈ 1285.4–1285.5 at
+  δ = −0.23) with total background ≈ 1.6 mV *even with 100 ppm N₂O
+  present and saturated water* — a true off-line point for
+  background/power referencing.
+
+Verdict unchanged and now global: **R15, 1297.8314 cm⁻¹ (7.705 µm),
+nominal 1298.06 at today's δ.**
+
 ## 3. Humidity & room temperature: is the fitted water level consistent?
 
 Fitted from the 28-Jul scan: p(H₂O) ≈ 24.7 Torr (4.1% of 600 Torr),
