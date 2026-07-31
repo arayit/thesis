@@ -68,12 +68,14 @@ anchor). Findings:
   R15–R18 (1297.8–1300.2)**: 43.7–45.0 mV per 100 ppm with water
   backgrounds of 0.03–0.26 mV. Above ~1330 cm⁻¹ the H₂O ν₂ band turns
   dense and strong (up to 3e-19) — no N₂O alternative lives there.
-- **The P branch is a minefield while the system is wet**: its peak
-  lines interleave with much stronger water than anything near R15 —
-  P6 (1268.39) sits under 57 mV of water, P2 (1271.97) under 89 mV
-  (the 1271.788 line, E″ = 649 rises further in a warm chamber).
-  Only P17–P19 (1274.6–1277.2) are clean, and they are 15–27% weaker
-  than R15.
+- **The P branch is a minefield while the system is wet** (J labels
+  from the par local-quanta field): **P15 (1271.9668) — the P-branch
+  Boltzmann peak, the exact twin of R15 — lies 0.18 cm⁻¹ from the
+  strongest water line of the whole region** (1271.7878,
+  S = 1.94e-21, E″ = 649): ~89 mV of water under a 41 mV N₂O signal.
+  P19 (1268.3856) has a water line at 1268.3822 — a dead-centre
+  coincidence (0.003 cm⁻¹). P17 (1270.18) sits under ~30 mV. The
+  clean P lines are P9–P12 (1274.6–1277.2), 12–27% weaker than R15.
 - Water-rejection ratios (100 ppm N₂O : sat-H₂O): R15 171:1,
   R16 479:1, R17 955:1, R18 1554:1. **R16/R17 are the fallbacks** if
   residual water sensitivity ever matters at sub-ppm levels — they
