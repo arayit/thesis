@@ -82,11 +82,47 @@ carries**, now with measured (not assumed) room conditions: the
 internal liquid-reservoir mechanism is confirmed quantitatively.
 `notes/n2o-line-selection.md` §3 updated.
 
+## Exp 9 — concentration calibration at R15 (17:20–18:08)
+
+**exp9-calibration/**: two-MFC dilution at constant total 10 sccm,
+205 Torr flow. Ladder 100/80/60/40/25/10/5/0 ppm + return-to-100;
+per step 60 s at the peak (nominal 1298.1) and 60 s at the valley
+(1297.7); signal = peak − valley. Nominal C in the metadata; MFC
+readbacks not logged (next time!).
+
+**Analysis:** `analysis/exp9_calibration.py` → `figures/exp9-calibration.(png|pdf)`.
+
+### Results
+
+- **k ≈ 0.20 mV/ppm at 205 Torr** (anchor slope from the 100/80 pair +
+  blank: 0.201 initial / 0.212 on return). Full-ladder linear fit
+  R² = 0.980 with *structured* residuals (below).
+- **Sensor-noise LOD = 0.6 ppm (1σ, 60 s point)**; 3σ ≈ 1.8 ppm.
+- **Blank Δ = +0.39 ± 0.12 mV** ≈ optical-floor tilt between the two
+  wavelengths (+0.2 mV in the exp7 blank) + ≤1 ppm mix leak-through.
+- **Return-to-100: +5.1%** vs initial (session drift/hysteresis bound).
+- **Preliminary NNEA ≈ 3×10⁻⁸ W·cm⁻¹·Hz⁻¹ᐟ²** (α_min(1σ) ≈ 2×10⁻⁶ cm⁻¹
+  at 3.3 mW, ENBW ≈ 0.04 Hz for TC 3 s) — same decade as the
+  Patimisco-family QEPAS literature. Refine after the Allan record.
+
+### The mid-ladder systematic (honest accounting)
+
+Steps 5–60 ppm read progressively LOW vs nominal (worst −2.8 mV at
+25 ppm), while 80/100 are mutually proportional to 0.5%. Settling
+cannot explain it: on a *descending* ladder, incomplete exchange biases
+readings HIGH. The deviation instead tracks the mix MFC toward its
+turndown floor (2.5 → 0.5 sccm setpoints), so the prime suspect is the
+**nominal concentration axis (mix-MFC underdelivery at small flows)**,
+not sensor nonlinearity — QEPAS response is linear in this range
+throughout the literature (e.g. Menduni 2023, 1–10 ppm). Action:
+repeat the 5–40 ppm steps logging MFC *readbacks* (or verify the mix
+MFC at 0.5–2.5 sccm independently) before the thesis-final calibration
+figure.
+
 ## Next
 
-1. Calibration ladder at R15 (constant total flow, peak−valley
-   differential, return-to-100 check) → k [mV/ppm], linearity, LOD.
-2. Blank Allan deviation at R15 (20–30 min on N₂) → formal LOD basis.
+1. Re-run 5–40 ppm ladder steps with MFC readbacks logged.
+2. Blank Allan deviation at R15 (20–30 min on N₂) → formal LOD + NNEA.
 3. Needle ramp 200 → 600 Torr under flow at R15: pressure-vs-flow
    separation + signal–pressure scaling.
 4. Methodology note: sealed-fill delivery failure + flow-mode
