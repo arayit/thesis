@@ -1,0 +1,3 @@
+blank n2 scan. 1295-1300 with 0.1 cm^-1 res. 200 torr, constant flow, 10 sccm. 
+
+21 degree celcius with 75% humidity.

@@ -41,13 +41,53 @@ under flow** rather than pressure itself. The sealed-fill delivery
 failure remains an open mechanism question — operationally moot in
 flow mode, but worth a paragraph in the thesis methodology.
 
+## Exp 7 / Exp 8 — blank vs analyte full-window pair (15:20–16:51)
+
+**exp7-scan/**: pure N₂ blank, nominal 1295.0–1300.0, 0.1 steps,
+30 s/point, ~200 Torr constant flow (10 sccm). Closing anchor at
+1295.0: +0.04 mV over 42 min. **Operator note: lab at 21 °C, 75% RH.**
+**exp8-scan/**: identical grid with the 100 ppm N₂O mix. Closing anchor
+−0.85 mV. *Metadata correction:* `Gas.gas_type` in several early exp8
+files reads "N2" (logger field not updated at session start); the
+flowing gas was the N₂O mix throughout — identity assigned per
+experiment, not per header. First ~2 points carry a small
+post-switch equilibration transient.
+
+**Analysis:** `analysis/exp78_comb_fit.py` → `figures/exp78-comb.(png|pdf)`.
+
+### Result — the complete R-branch comb
+
+The point-by-point difference exp8 − exp7 (water background and optical
+floor cancel) shows **six pickets, R12–R17, at 0.78 cm⁻¹ spacing**, all
+at the HITRAN positions with δ = −0.23 (fourth consecutive session at
+−0.22…−0.24). Diff-fit R² = 0.888 — limited by steep-flank sampling
+(±0.01 cm⁻¹ set-point reproducibility ≈ ±2 mV on 200 mV/cm⁻¹ flanks),
+not by noise. Picket amplitude ≈ 78 ppm-equivalent on the 600-Torr
+responsivity anchor (exp6 fine scan gave ≈ 125): both within the
+anchor's ±30–40% systematic (Q rises at 205 Torr; lineshape-width
+coupling) — i.e. **consistent with the nominal 100 ppm**; the real
+concentration axis comes from the upcoming calibration ladder.
+
+The blank (exp7) documents the flow-mode background: 5–7 mV optical
+floor + flow-suppressed water (~+7 mV at nominal 1296.9, vs ~50 mV in
+sealed mode — the supply outruns reservoir evaporation, as inferred
+on 21 Jul).
+
+### Humidity closure (measured room data at last)
+
+Lab: 21 °C, 75% RH → lab-air water partial pressure 0.75 × 18.7 =
+**14.0 Torr** (dew point ≈ 16.3 °C). The sealed-chamber fits of
+28/31 Jul gave ~25 Torr — **1.8× more water than the lab air itself
+carries**, now with measured (not assumed) room conditions: the
+internal liquid-reservoir mechanism is confirmed quantitatively.
+`notes/n2o-line-selection.md` §3 updated.
+
 ## Next
 
-1. Needle ramp 200 → 600 Torr under flow at R15: separates
-   pressure vs flow, measures the signal–pressure scaling, and picks
-   the operating pressure with data.
-2. Long stationary record at R15 (stability, Allan deviation).
-3. Calibration series (concentration steps) → k [mV/ppm], linearity,
-   LOD; then NNEA.
+1. Calibration ladder at R15 (constant total flow, peak−valley
+   differential, return-to-100 check) → k [mV/ppm], linearity, LOD.
+2. Blank Allan deviation at R15 (20–30 min on N₂) → formal LOD basis.
+3. Needle ramp 200 → 600 Torr under flow at R15: pressure-vs-flow
+   separation + signal–pressure scaling.
 4. Methodology note: sealed-fill delivery failure + flow-mode
    requirement; per-session δ check (water peak, 10 min).

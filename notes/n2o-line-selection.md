@@ -121,6 +121,18 @@ history is also plausible: pipes were left open to humid summer lab air
 and the system runs sub-atmospheric (ingress direction), so moist air
 entered and condensed in cold spots/low points over months.
 
+**Update (3 Aug) — measured room conditions close the argument.**
+Operator log (exp7): lab at **21 °C, 75% RH** → lab-air water partial
+pressure = 0.75 × 18.7 Torr = **14.0 Torr**, dew point ≈ 16.3 °C. The
+sealed-chamber fits (28/31 Jul) gave ~25 Torr of water vapor — **1.8×
+more than the lab air itself carries**. Check 2 above is now based on
+measured, not assumed, humidity: no fill made from dry N₂ (≤0.2 ppm
+H₂O) can reach 25 Torr from trapped room air; an internal liquid
+reservoir at chamber temperature is required. (75% RH summer air also
+quantifies the ingress source that built the reservoir.) In constant
+flow the same chamber shows only ~+7 mV of water (exp7 blank) —
+supply outruns evaporation, consistent with the 21-Jul observation.
+
 ## Sources
 
 Accessible online explainers of P/R-branch structure:
