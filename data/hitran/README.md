@@ -65,6 +65,106 @@ to gas switching, and zero signal with the beam blocked. Tests
 3. Repeat the narrow scan twice back-to-back: peak position shifting
    between runs ⇒ tuner/frequency instability quantified.
 
-(Caveat: this dataset contains no H₂O lines; H₂O interference near the
-operating region is documented separately in Results §h2o and is not
-excluded by these tests.)
+## ⚠ RETRACTED (27 Jul) — the "H₂O ruled out" verdict below was wrong
+
+The ruling assumed room-temperature saturation (~3.5% at 600 Torr /
+23 °C) versus a computed ~4.7% requirement and called the factor-1.35
+gap "impossible by an order of magnitude." Two effects close the gap:
+the chamber runs warm (saturation 5.3% at 30 °C) and the relevant H₂O
+line at **1296.7093 cm⁻¹** is a hot line (E″ = 1475 cm⁻¹) whose strength
+rises steeply with temperature. A water-saturated warm chamber yields
+40–50 mV on this line. Moreover the 27-Jul three-point readings
+(42 / 27 / 12 mV at nominal 1296.7 / 1297.1 / 1297.6) fit a *single*
+line at ~1296.7 (monotonic decay, offset ≈ 0 today) and are
+incompatible with the equal-strength N₂O comb at any offset. Leading
+hypothesis: **liquid water condensed inside the gas system** (months of
+sub-atmospheric humid-air ingress), re-saturating every sealed fill —
+explaining purge immunity, evacuate–refill recovery, the minutes-scale
+rise after fills, and the low (~6 mV) level under flow-through (flow
+outruns the evaporation). Discriminating scan: H₂O doublet at
+1296.49 + 1296.71 with silent R13/R14/R15 positions, versus the N₂O
+0.78 cm⁻¹ comb. Credit: the water suspicion was the operator's,
+raised a week earlier and wrongly dismissed by this analysis.
+
+## ✅ CONFIRMED (28 Jul) — the background is water, proven by full scan
+
+The 51-point pure-N₂ scan 1295–1300 cm⁻¹ (`experimental/daq/2026-07-28/`,
+fit in `analysis/exp4_scan_fit.py`, figure `figures/exp4-scan-fit.png`)
+matches the HITRAN water spectrum with **R² = 0.992** (N₂O-only model:
+R² = 0.04) — all three H₂O features at correct positions and relative
+intensities, N₂O R12–R17 pickets silent. Fitted: δ = −0.23 cm⁻¹
+(per-session offset), laser FWHM = 0.26 cm⁻¹, water ≈ saturation.
+The hypothesis below stands confirmed.
+
+## Reference figure and the complete H₂O picture (27 Jul)
+
+`h2o_n2o_1295-1300_hitran.par` (H₂O + N₂O, 1295–1300) →
+`analysis/hitran_reference_plot.py` → `figures/hitran-n2o-h2o-reference.(png|pdf)`:
+stick spectrum + simulated α at lab conditions (600 Torr, 25 °C, 100 ppm
+N₂O vs saturated 4.0% H₂O).
+
+Significant H₂O lines: **1296.490** (S = 1.72e-22 + 5.7e-23, E″ = 2010),
+**1296.709** (3.63e-22, E″ = 1475), **1297.181/1297.184** (combined
+3.0e-23, E″ = 2358). At saturation these give α comparable to 100 ppm
+N₂O near 1296.5–1296.7 and a secondary feature at 1297.18 — **all three
+27-Jul probe points (nominal 1296.7 / 1297.1 / 1297.6 → 42 / 27 / 12 mV)
+land on water structure**, consistent with the condensed-reservoir
+hypothesis with today's offset ≈ 0. Near **R15 the saturated-water α is
+~350× below the N₂O peak** (and similar at R16): the proposed
+operating-line move is quantitatively justified by this figure.
+
+## H₂O ruled out for the 20-July evening background (superseded — see retraction above)
+
+`h2o_n2o_1295-1298_hitran.csv` (fetched 20 Jul, H₂O + N₂O, 1295–1298):
+the strongest H₂O line in the window is **3.6 × 10⁻²² at 1296.709**
+(a hot line, E″ = 1475 cm⁻¹) — ~4,700× weaker than the N₂O R-branch
+lines. Producing a 45 mV signal via H₂O here would require ~47% water
+vapour; the saturation limit at 600 Torr / 23 °C is ~3.5%. **Physically
+impossible → the steady 45–50 mV background at nominal 1297.6 cm⁻¹ is
+not H₂O** (within 1295–1298; December's 1287.5/1288.5 peaks remain
+genuine H₂O, outside this window).
+
+Within 1295–1298 the only transitions strong enough to give tens of mV
+at sub-% concentrations are the N₂O main-isotopologue R13/R14/R15 lines
+(hot bands are 30× weaker). The economical hypothesis consistent with
+all of tonight's facts: **N₂O still present in the ADM despite the
+closed cylinder and 30-min "purge" (purge flow not exchanging the module
+volume — plumbing/dead-volume question), combined with a shifted
+instrument wavenumber offset after the evening retunes** (so nominal
+1297.6 now sits on R15 at 1297.831 while nominal 1296.7 sits in the
+R13–R14 gap). Offset shifts of ±0.1–0.2 between tuning sessions are
+within EC-QCL set-point reproducibility.
+
+**Decisive test (next session, ~18 min): narrow scan in pure N₂,
+1295.3 → 1298.8, 0.1 steps, ~30 s/point.** If trapped N₂O: three
+equal-height peaks at the R13/R14/R15 positions, and the peak positions
+measure the current offset directly (free recalibration). A single peak
+with silent neighbours would exclude N₂O (equal-S picket) and reopen the
+search.
+
+**RESOLVED (operator confirmation, 20 Jul evening): the ADM output valve
+was never opened.** The module has been a dead-end volume all along —
+supply-side gas switches changed the line composition but the ADM
+interior only exchanged by slow diffusion, so the day's N₂O charge stayed
+trapped through every "purge". This single fact explains: the steady
+45–50 mV "N₂ background" (trapped N₂O read on R15), its immunity to the
+closed cylinder and 30-min purge, the weak/confusing response to gas
+switching in calibration legs 1–3, and (in part) historical anomalies —
+the near-identical 6-July N₂ vs N₂O power sweeps and the December
+"closed chamber" operating mode described in the methodology. Fix:
+open the output valve → true flow-through. Confirmation scan above still
+worth doing *before* opening the valve (trapped gas = free offset
+calibration sample), then watch the decay at the R15 set point after
+opening (purge time constant, second confirmation).
+
+**Correction (21 Jul, morning):** the set-point bookkeeping of the late
+evening was in error — the steady 45–50 mV trapped-gas reading and the
+subsequent purge-decay monitoring were at nominal **1296.7** (= R14 with
+the original −0.35 offset), not 1297.6. The "offset shifted" hypothesis
+above is therefore unnecessary: everything is consistent with the
+July-3 calibration unchanged (nominal 1296.7 = R14 at 1297.0501;
+trapped charge ≈ 100 ppm reading ~45–50 mV exactly as 100 ppm did on
+July 3; post-purge floor ~3 mV ≈ few-ppm residual + the known few-mV
+optical background). Valve opened 21 Jul: flow-through purge dropped
+the on-line background 45–50 → ~3 mV. Gap points for flat-background
+checks with the −0.35 offset: nominal ≈ 1296.3 or ≈ 1297.1.
