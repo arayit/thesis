@@ -1,0 +1,5 @@
+this experiment is wavelength scan between 1295-1300 cm^-1 with 0.1 cm^-1 resolution for pure n2 to characterize humidity in the gas system. the pressure set to 600 torr while 10 sccm n2 is supplying to the system. alignment conditions are standing still and close to theoretical value, whereas around 0.86 transmission while theoretical transmission is approx. 0.86. other parameters are listed in the csv file, each point will have its own csv for further use. each point will be measured 30s with TC=3 s and 200 mV sens. value. 
+
+power readings are problematic, I forgot to change wavelength until 1296.5. so power readings up to that point have 0.1 mW error.
+
+burak
